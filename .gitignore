@@ -1,0 +1,4 @@
+# Lokaal geinstalleerde agent-skills (npx skills add), niet voor de website
+.agents/
+.claude/skills/
+skills-lock.json
