@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="nl-BE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ice Bar Knokke | Opening 28 november</title>
+  <meta name="description" content="De Ice Bar Knokke opent op 28 november op het Van Bunnenplein. Winterbar in chaletstijl met DJ-avonden, afterworks en eindejaarsdrinks.">
+  <meta name="theme-color" content="#0e1116">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ice Bar Knokke | Opening 28 november">
+  <meta property="og:description" content="Winterbar in chaletstijl op het Van Bunnenplein. Opening op 28 november.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta property="og:locale" content="nl_BE">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BarOrPub",
+    "name": "Ice Bar Knokke",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Van Bunnenplein",
+      "addressLocality": "Knokke-Heist",
+      "postalCode": "8300",
+      "addressCountry": "BE"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --night: #0e1116;
+      --night-2: #161b22;
+      --ivory: #f4efe6;
+      --ivory-dim: rgba(244, 239, 230, .62);
+      --amber: #f2b45a;
+      --amber-soft: rgba(242, 180, 90, .18);
+      --line: rgba(244, 239, 230, .16);
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Jost", system-ui, sans-serif;
+
+      /* Sfeerfoto: zet hier de foto zodra die er is, bv. url("assets/hero.jpg") */
+      --hero-photo: none;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--night);
+      color: var(--ivory);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Achtergrond ---------- */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(120% 80% at 50% 110%, rgba(242, 180, 90, .14), transparent 60%),
+        radial-gradient(90% 60% at 50% -10%, rgba(120, 150, 190, .10), transparent 65%),
+        var(--night);
+    }
+
+    .backdrop::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--hero-photo) center / cover no-repeat;
+      opacity: .38;
+      filter: saturate(.9);
+    }
+
+    .backdrop::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(14,17,22,.55) 0%, rgba(14,17,22,.25) 45%, rgba(14,17,22,.85) 100%);
+    }
+
+    /* Lichtslinger bovenaan, knipoog naar de lampjes in het chalet */
+    .garland {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .garland path { fill: none; stroke: rgba(244, 239, 230, .14); stroke-width: 1; }
+
+    .garland circle {
+      fill: var(--amber);
+      filter: drop-shadow(0 0 6px rgba(242, 180, 90, .9));
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: .95; }
+      50% { opacity: .45; }
+    }
+
+    #snow {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ---------- Inhoud ---------- */
+    main {
+      position: relative;
+      z-index: 3;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 96px 16px 48px;
+    }
+
+    .logo {
+      width: clamp(150px, 22vw, 230px);
+      height: auto;
+      opacity: 0;
+      animation: rise 1.4s cubic-bezier(.2, .7, .2, 1) .1s forwards;
+    }
+
+    .eyebrow {
+      margin-top: clamp(28px, 5vh, 48px);
+      font-size: .78rem;
+      letter-spacing: .42em;
+      text-transform: uppercase;
+      color: var(--ivory-dim);
+      opacity: 0;
+      animation: rise 1.2s cubic-bezier(.2, .7, .2, 1) .5s forwards;
+    }
+
+    h1 {
+      margin-top: 10px;
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2.6rem, 7vw, 4.6rem);
+      line-height: 1;
+      letter-spacing: .02em;
+      opacity: 0;
+      animation: rise 1.2s cubic-bezier(.2, .7, .2, 1) .65s forwards;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    /* ---------- Aftelklok ---------- */
+    .countdown {
+      margin-top: clamp(32px, 6vh, 56px);
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      align-items: start;
+      gap: 0;
+      opacity: 0;
+      animation: rise 1.2s cubic-bezier(.2, .7, .2, 1) .85s forwards;
+    }
+
+    .unit {
+      position: relative;
+      padding: 0 clamp(14px, 3.4vw, 40px);
+    }
+
+    .unit + .unit::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18%;
+      height: 52%;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .num {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2.8rem, 9vw, 6rem);
+      line-height: 1;
+      font-variant-numeric: tabular-nums lining-nums;
+      min-width: 2ch;
+    }
+
+    .label {
+      display: block;
+      margin-top: 10px;
+      font-size: .7rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--ivory-dim);
+    }
+
+    .open-now {
+      display: none;
+      margin-top: clamp(32px, 6vh, 56px);
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    .is-open .countdown { display: none; }
+    .is-open .open-now { display: block; }
+
+    /* ---------- Onderaan ---------- */
+    .meta {
+      margin-top: clamp(40px, 8vh, 72px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px 22px;
+      font-size: .82rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ivory-dim);
+      opacity: 0;
+      animation: rise 1.2s cubic-bezier(.2, .7, .2, 1) 1.05s forwards;
+    }
+
+    .meta .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 8px var(--amber);
+    }
+
+    .meta a {
+      color: var(--ivory);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: border-color .3s, color .3s;
+    }
+
+    .meta a:hover,
+    .meta a:focus-visible {
+      color: var(--amber);
+      border-color: var(--amber);
+      outline: none;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2.25rem; }
+      .unit { padding: 0 10px; }
+      .label { letter-spacing: .2em; font-size: .62rem; }
+      .meta { letter-spacing: .14em; font-size: .74rem; }
+      .meta .dot { display: none; }
+      .meta { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; opacity: 1 !important; transform: none !important; }
+      #snow { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <svg class="garland" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 18 Q150 78 300 22 Q450 82 600 24 Q750 82 900 22 Q1050 78 1200 18" />
+    <g id="bulbs"></g>
+  </svg>
+
+  <canvas id="snow" aria-hidden="true"></canvas>
+
+  <main id="top">
+    <img class="logo" src="assets/logo-icebar-wit.png" alt="Ice Bar Knokke" width="662" height="900">
+
+    <p class="eyebrow">Van Bunnenplein &middot; Knokke</p>
+    <h1>Opening <em>28 november</em></h1>
+
+    <div class="countdown" role="timer" aria-live="off" aria-label="Aftellen tot de opening">
+      <div class="unit"><span class="num" data-k="d">00</span><span class="label">dagen</span></div>
+      <div class="unit"><span class="num" data-k="h">00</span><span class="label">uren</span></div>
+      <div class="unit"><span class="num" data-k="m">00</span><span class="label">min</span></div>
+      <div class="unit"><span class="num" data-k="s">00</span><span class="label">sec</span></div>
+    </div>
+
+    <p class="open-now">We zijn open. Tot straks in het chalet.</p>
+
+    <div class="meta">
+      <span>Winterbar in chaletstijl</span>
+      <span class="dot" aria-hidden="true"></span>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Van+Bunnenplein+Knokke-Heist" target="_blank" rel="noopener">Route</a>
+    </div>
+  </main>
+
+  <script>
+    // Opening: zaterdag 28 november 2026 om 16u Belgische tijd (CET = UTC+1)
+    const OPENING = new Date("2026-11-28T16:00:00+01:00");
+
+    const els = {};
+    document.querySelectorAll(".num").forEach(n => els[n.dataset.k] = n);
+    const pad = n => String(n).padStart(2, "0");
+
+    function tick() {
+      const diff = OPENING - Date.now();
+      if (diff <= 0) {
+        document.body.classList.add("is-open");
+        return;
+      }
+      const s = Math.floor(diff / 1000);
+      els.d.textContent = pad(Math.floor(s / 86400));
+      els.h.textContent = pad(Math.floor(s / 3600) % 24);
+      els.m.textContent = pad(Math.floor(s / 60) % 60);
+      els.s.textContent = pad(s % 60);
+      setTimeout(tick, 1000 - (Date.now() % 1000));
+    }
+    tick();
+
+    // Lampjes langs de slinger
+    (function () {
+      const path = document.querySelector(".garland path");
+      const g = document.getElementById("bulbs");
+      const len = path.getTotalLength();
+      const count = 24;
+      for (let i = 1; i < count; i++) {
+        const p = path.getPointAtLength((len / count) * i);
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("cx", p.x);
+        c.setAttribute("cy", p.y + 4);
+        c.setAttribute("r", 2.6);
+        c.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
+        g.appendChild(c);
+      }
+    })();
+
+    // Lichte sneeuw
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const canvas = document.getElementById("snow");
+      const ctx = canvas.getContext("2d");
+      let w, h, flakes;
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = canvas.width = innerWidth * dpr;
+        h = canvas.height = innerHeight * dpr;
+        canvas.style.width = innerWidth + "px";
+        canvas.style.height = innerHeight + "px";
+        const amount = Math.round(Math.min(110, innerWidth / 12));
+        flakes = Array.from({ length: amount }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: (Math.random() * 1.6 + .5) * dpr,
+          v: (Math.random() * .5 + .25) * dpr,
+          drift: Math.random() * Math.PI * 2,
+          a: Math.random() * .5 + .25
+        }));
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (const f of flakes) {
+          f.y += f.v;
+          f.drift += .01;
+          f.x += Math.sin(f.drift) * .3;
+          if (f.y > h + 5) { f.y = -5; f.x = Math.random() * w; }
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(244,239,230," + f.a + ")";
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      addEventListener("resize", resize);
+      resize();
+      draw();
+    })();
+  </script>
+</body>
+</html>
