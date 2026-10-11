@@ -8,6 +8,8 @@
   <meta name="theme-color" content="#0e1116">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="preload" as="image" href="assets/hero.jpg" media="(min-width: 701px), (orientation: landscape)">
+  <link rel="preload" as="image" href="assets/hero-mobile.jpg" media="(max-width: 700px) and (orientation: portrait)">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Ice Bar Knokke | Opening 28 november">
@@ -39,15 +41,14 @@
       --night: #0e1116;
       --night-2: #161b22;
       --ivory: #f4efe6;
-      --ivory-dim: rgba(244, 239, 230, .62);
+      --ivory-dim: rgba(244, 239, 230, .74);
       --amber: #f2b45a;
       --amber-soft: rgba(242, 180, 90, .18);
       --line: rgba(244, 239, 230, .16);
       --serif: "Cormorant Garamond", Georgia, serif;
       --sans: "Jost", system-ui, sans-serif;
 
-      /* Sfeerfoto: zet hier de foto zodra die er is, bv. url("assets/hero.jpg") */
-      --hero-photo: none;
+      --hero-photo: url("assets/hero.jpg");
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,16 +79,28 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: var(--hero-photo) center / cover no-repeat;
-      opacity: .38;
-      filter: saturate(.9);
+      background: var(--hero-photo) 40% center / cover no-repeat;
+      opacity: .5;
+      filter: saturate(.95);
+      animation: drift 40s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: scale(1.04); }
+      to { transform: scale(1.12) translate(-1%, -1%); }
+    }
+
+    @media (max-width: 700px) and (orientation: portrait) {
+      :root { --hero-photo: url("assets/hero-mobile.jpg"); }
     }
 
     .backdrop::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(14,17,22,.55) 0%, rgba(14,17,22,.25) 45%, rgba(14,17,22,.85) 100%);
+      background:
+        radial-gradient(60% 55% at 50% 55%, rgba(14,17,22,.55), transparent 80%),
+        linear-gradient(180deg, rgba(14,17,22,.7) 0%, rgba(14,17,22,.35) 40%, rgba(14,17,22,.9) 100%);
     }
 
     .grain {
