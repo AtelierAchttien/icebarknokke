@@ -15,6 +15,7 @@
   --rule-light: rgba(255, 255, 255, .22);
   --display: "Italiana", "Cormorant Garamond", Georgia, serif;
   --text: "Belleza", "Gill Sans", "Trebuchet MS", sans-serif;
+  --gutter: 24px;
   --gutter: clamp(16px, 5vw, 56px);
   --measure: 62ch;
   --ease: cubic-bezier(.2, .7, .2, 1);
@@ -253,7 +254,7 @@ p { max-width: var(--measure); }
   padding: clamp(56px, 9vh, 96px) var(--gutter);
 }
 
-.band p { margin-inline: auto; color: var(--white-soft); font-size: 1.1rem; }
+.band p { margin-left: auto; margin-right: auto; color: var(--white-soft); font-size: 1.1rem; }
 
 .band .statement {
   font-family: var(--display);
@@ -262,14 +263,16 @@ p { max-width: var(--measure); }
   color: var(--white);
   text-wrap: balance;
   max-width: 20ch;
-  margin-inline: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .band .statement + p { margin-top: 18px; }
 .band .btn { margin-top: 32px; }
 
-.wrap { width: min(100% - 2 * var(--gutter), 1120px); margin-inline: auto; }
-.narrow { width: min(100% - 2 * var(--gutter), 760px); margin-inline: auto; }
+.wrap, .narrow { box-sizing: border-box; width: 100%; max-width: calc(1120px + 2 * var(--gutter)); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+.narrow { max-width: calc(760px + 2 * var(--gutter)); }
+.band .wrap { padding-left: 0; padding-right: 0; max-width: 1120px; }
 
 .section { padding: clamp(64px, 10vh, 112px) 0; }
 .section + .section { border-top: 1px solid var(--rule); }
@@ -529,8 +532,8 @@ footer {
   padding: 56px var(--gutter) 40px;
 }
 
-footer .wordmark { width: 96px; height: auto; margin-inline: auto; }
-footer p { margin-inline: auto; margin-top: 28px; color: var(--white-soft); font-size: .98rem; line-height: 1.8; }
+footer .wordmark { width: 96px; height: auto; margin-left: auto; margin-right: auto; }
+footer p { margin-left: auto; margin-right: auto; margin-top: 28px; color: var(--white-soft); font-size: .98rem; line-height: 1.8; }
 footer a { color: var(--white); text-decoration-color: var(--white-soft); }
 footer .back { display: inline-block; margin-top: 28px; font-size: .92rem; color: var(--white-soft); }
 
