@@ -1,0 +1,246 @@
+/* Volledige site Ice Bar Knokke. Zelfde kleuren en letters als de aftelpagina. */
+:root {
+  --night: #0e1116;
+  --night-2: #161b22;
+  --ivory: #f4efe6;
+  --ivory-dim: rgba(244, 239, 230, .74);
+  --amber: #f2b45a;
+  --line: rgba(244, 239, 230, .16);
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Jost", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--night);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ---------- Achtergrond ---------- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(120% 80% at 50% 110%, rgba(242, 180, 90, .14), transparent 60%),
+    var(--night);
+}
+
+.backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("hero.jpg") 40% center / cover no-repeat;
+  opacity: .32;
+  filter: saturate(.95);
+}
+
+.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14,17,22,.6) 0%, rgba(14,17,22,.78) 45%, rgba(14,17,22,.96) 100%);
+}
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Kop ---------- */
+.top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px clamp(16px, 5vw, 48px);
+}
+
+.brand img { display: block; width: 64px; height: auto; }
+
+.top nav { display: flex; gap: clamp(18px, 3vw, 32px); }
+
+.top nav a {
+  font-size: .72rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--ivory-dim);
+  text-decoration: none;
+  transition: color .25s;
+}
+
+.top nav a:hover { color: var(--ivory); }
+
+/* ---------- Inhoud ---------- */
+main { position: relative; z-index: 2; }
+
+section {
+  width: min(100%, 640px);
+  margin: 0 auto;
+  padding: clamp(56px, 10vh, 96px) 16px;
+  text-align: center;
+}
+
+h1, h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.4rem, 6.5vw, 4.2rem); }
+h2 { font-size: clamp(1.9rem, 5vw, 2.8rem); }
+
+h1 em, h2 em { font-style: italic; color: var(--amber); }
+
+.eyebrow, .intro {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ivory-dim);
+}
+
+.hero { padding-top: clamp(48px, 10vh, 112px); }
+.hero .eyebrow { margin-bottom: 12px; }
+.hero .lead { margin: 22px auto 0; max-width: 480px; font-size: 1.05rem; color: var(--ivory-dim); }
+
+.intro { margin-top: 14px; }
+
+.actions {
+  margin-top: clamp(28px, 5vh, 44px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 26px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--ivory);
+  font-size: .82rem;
+  font-weight: 400;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color .25s, border-color .25s, color .25s, transform .15s;
+}
+
+.btn:hover { border-color: var(--ivory-dim); background: rgba(244, 239, 230, .05); }
+.btn:active { transform: translateY(1px) scale(.99); }
+.btn:focus-visible { outline: 1px solid var(--amber); outline-offset: 3px; }
+
+.btn-primary { background: var(--amber); border-color: var(--amber); color: var(--night); font-weight: 500; }
+.btn-primary:hover { background: #f5c477; border-color: #f5c477; }
+
+/* ---------- DJ-programma ---------- */
+.month { margin-top: clamp(36px, 6vh, 56px); text-align: left; }
+
+.month h3 {
+  font-size: .7rem;
+  font-weight: 400;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--amber);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.month ol { list-style: none; }
+
+.month li {
+  display: grid;
+  grid-template-columns: 2.2em 4.2em 1fr;
+  align-items: baseline;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.month .wd {
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ivory-dim);
+}
+
+.month .dt { font-variant-numeric: tabular-nums lining-nums; }
+
+.month .dj { font-family: var(--serif); font-size: 1.35rem; text-align: right; }
+
+.month li.is-past { opacity: .38; }
+
+.month li.is-today .dj::after {
+  content: "vanavond";
+  margin-left: 10px;
+  font-family: var(--sans);
+  font-size: .62rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  vertical-align: middle;
+}
+
+.note { margin-top: clamp(32px, 5vh, 48px); font-size: .82rem; color: var(--ivory-dim); }
+
+/* ---------- Praktisch ---------- */
+.practical dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 28px;
+  margin-top: clamp(32px, 5vh, 48px);
+  text-align: left;
+}
+
+.practical dt {
+  font-size: .7rem;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+
+.practical dd { color: var(--ivory-dim); }
+
+.practical .btn { margin-top: clamp(32px, 5vh, 48px); }
+
+/* ---------- Voet ---------- */
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 40px 16px 48px;
+  text-align: center;
+  font-size: .8rem;
+  color: var(--ivory-dim);
+  border-top: 1px solid var(--line);
+}
+
+footer a { display: inline-block; margin-top: 10px; color: var(--ivory-dim); }
+footer a:hover { color: var(--ivory); }
+
+@media (max-width: 480px) {
+  .brand img { width: 52px; }
+  .actions { flex-direction: column; align-items: stretch; }
+  .btn { justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

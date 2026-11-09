@@ -300,6 +300,95 @@
 
     .is-open #add-to-calendar { display: none; }
 
+    /* ---------- Toegang tot de volledige site ---------- */
+    .site-link {
+      position: fixed;
+      right: 18px;
+      bottom: 14px;
+      z-index: 4;
+      font-size: .62rem;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, .38);
+      text-decoration: none;
+      transition: color .25s;
+    }
+
+    .site-link:hover, .site-link:focus-visible { color: var(--ivory-dim); outline: none; }
+
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(14, 17, 22, .82);
+      backdrop-filter: blur(6px);
+    }
+
+    .gate.is-open { display: flex; }
+
+    .gate form {
+      width: min(100%, 360px);
+      padding: 36px 28px 30px;
+      background: var(--night-2);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      text-align: center;
+      animation: rise .5s cubic-bezier(.2, .7, .2, 1) forwards;
+    }
+
+    .gate h2 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 1.7rem;
+      line-height: 1.1;
+    }
+
+    .gate p { margin-top: 8px; font-size: .85rem; color: var(--ivory-dim); }
+
+    .gate input {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px 14px;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: var(--ivory);
+      font: inherit;
+      font-size: 1rem;
+      letter-spacing: .12em;
+      text-align: center;
+    }
+
+    .gate input:focus { outline: none; border-color: var(--amber); }
+
+    .gate .btn { width: 100%; justify-content: center; margin-top: 12px; }
+
+    .gate .error {
+      display: none;
+      margin-top: 12px;
+      font-size: .8rem;
+      color: #e9907a;
+    }
+
+    .gate.is-wrong .error { display: block; }
+    .gate.is-wrong input { border-color: #e9907a; }
+
+    .gate .close {
+      margin-top: 18px;
+      background: none;
+      border: 0;
+      color: var(--ivory-dim);
+      font: inherit;
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
     @keyframes rise {
       from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: none; }
@@ -351,6 +440,19 @@
     </nav>
   </main>
 
+  <a class="site-link" href="site/" id="site-link">Volledige site</a>
+
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <form id="gate-form" autocomplete="off">
+      <h2 id="gate-title">Volledige site</h2>
+      <p>Deze pagina is nog in opbouw. Vul de code in om verder te gaan.</p>
+      <input type="password" id="gate-code" name="code" placeholder="Code" aria-label="Code" required>
+      <button class="btn btn-primary" type="submit">Verder</button>
+      <p class="error" role="alert">Die code klopt niet.</p>
+      <button class="close" type="button" id="gate-close">Sluiten</button>
+    </form>
+  </div>
+
   <script>
     // Opening: zaterdag 28 november 2026 om 16u Belgische tijd (CET = UTC+1)
     const OPENING = new Date("2026-11-28T16:00:00+01:00");
@@ -394,6 +496,58 @@
       ].join("\r\n");
       document.getElementById("add-to-calendar").href =
         "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+    })();
+
+    // Toegang tot de volledige site met een code.
+    // De code zelf staat niet in deze pagina, enkel de SHA-256 ervan.
+    // Nieuwe code instellen: hash berekenen (bv. `echo -n "code" | sha256sum`) en hier plakken,
+    // en dezelfde waarde in site/index.html zetten.
+    (function () {
+      const HASH = "de0a3a66b00d33d4ba1d18e54d6c8388ff5c002a2585706f4c38a5712fb0448a";
+      const gate = document.getElementById("gate");
+      const form = document.getElementById("gate-form");
+      const input = document.getElementById("gate-code");
+      const link = document.getElementById("site-link");
+
+      async function sha256(text) {
+        const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+        return Array.from(new Uint8Array(buf), b => b.toString(16).padStart(2, "0")).join("");
+      }
+
+      function open(e) {
+        e.preventDefault();
+        if (sessionStorage.getItem("icebar-site") === HASH) { location.href = link.href; return; }
+        gate.classList.add("is-open");
+        input.focus();
+      }
+
+      function close() {
+        gate.classList.remove("is-open", "is-wrong");
+        form.reset();
+      }
+
+      link.addEventListener("click", open);
+      document.getElementById("gate-close").addEventListener("click", close);
+      gate.addEventListener("click", e => { if (e.target === gate) close(); });
+      addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+
+      // Wie rechtstreeks naar de volledige site surft zonder code, komt hier terecht met ?site
+      if (new URLSearchParams(location.search).has("site")) {
+        history.replaceState(null, "", location.pathname);
+        gate.classList.add("is-open");
+      }
+
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+        const hash = await sha256(input.value.trim().toLowerCase());
+        if (hash === HASH) {
+          sessionStorage.setItem("icebar-site", HASH);
+          location.href = link.href;
+        } else {
+          gate.classList.add("is-wrong");
+          input.select();
+        }
+      });
     })();
 
     // Lampjes langs de slinger, opnieuw getekend op schermbreedte
