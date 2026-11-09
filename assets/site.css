@@ -535,6 +535,11 @@ footer {
 footer .wordmark { width: 96px; height: auto; margin-left: auto; margin-right: auto; }
 footer p { margin-left: auto; margin-right: auto; margin-top: 28px; color: var(--white-soft); font-size: .98rem; line-height: 1.8; }
 footer a { color: var(--white); text-decoration-color: var(--white-soft); }
+footer .socials { list-style: none; display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+footer .socials a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--white); transition: color .2s var(--ease); }
+footer .socials a:hover { color: var(--white-soft); }
+footer .socials svg { width: 24px; height: 24px; }
+
 footer .back { display: inline-block; margin-top: 28px; font-size: .92rem; color: var(--white-soft); }
 
 @media (prefers-reduced-motion: reduce) {
