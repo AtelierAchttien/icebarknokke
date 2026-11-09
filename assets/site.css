@@ -342,7 +342,7 @@ p { max-width: var(--measure); }
 @media (max-width: 760px) { .find { grid-template-columns: 1fr; } }
 
 /* ---------- Kalender ---------- */
-.calendar-intro { margin-bottom: clamp(32px, 5vh, 56px); }
+.calendar-intro { margin-bottom: clamp(32px, 5vh, 56px); max-width: 58ch; text-wrap: pretty; }
 
 /* Lijst per maand (kleine schermen) */
 .calendar {
@@ -476,7 +476,7 @@ p { max-width: var(--measure); }
 
 .logo-grid li { border: 1px solid var(--rule-light); }
 
-.logo-grid a {
+.logo-grid a, .logo-grid span {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -531,7 +531,7 @@ footer {
 
 footer .wordmark { width: 96px; height: auto; margin-inline: auto; }
 footer p { margin-inline: auto; margin-top: 28px; color: var(--white-soft); font-size: .98rem; line-height: 1.8; }
-footer a { color: var(--white); }
+footer a { color: var(--white); text-decoration-color: var(--white-soft); }
 footer .back { display: inline-block; margin-top: 28px; font-size: .92rem; color: var(--white-soft); }
 
 @media (prefers-reduced-motion: reduce) {
