@@ -464,6 +464,40 @@ p { max-width: var(--measure); }
 .form-status.is-error { color: #9a3b2e; }
 .hp { position: absolute; left: -9999px; }
 
+/* ---------- Sponsors ---------- */
+.band.sponsors { text-align: center; }
+
+.logo-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.logo-grid li { border: 1px solid var(--rule-light); }
+
+.logo-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  padding: 24px;
+  transition: background-color .2s var(--ease);
+}
+
+.logo-grid a:hover { background: rgba(255, 255, 255, .06); }
+.logo-grid a:focus-visible { outline-color: var(--white); }
+
+/* Eén kleur voor alle logo's, zodat zeventien huisstijlen niet vloeken.
+   Weglaten als de sponsors hun logo in kleur willen. */
+.logo-grid img { max-width: 72%; max-height: 84px; width: auto; height: auto; filter: brightness(0) invert(1); }
+
+.sponsors .also { margin-top: 36px; max-width: 60ch; }
+.sponsors .also a { color: var(--white); }
+
+@media (max-width: 900px) { .logo-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .logo-grid a { min-height: 112px; padding: 16px; } .logo-grid img { max-height: 64px; max-width: 78%; } }
+
 /* ---------- FAQ ---------- */
 .faq details { border-top: 1px solid var(--rule); }
 .faq details:last-child { border-bottom: 1px solid var(--rule); }
