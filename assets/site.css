@@ -345,7 +345,7 @@ p { max-width: var(--measure); }
 @media (max-width: 760px) { .find { grid-template-columns: 1fr; } }
 
 /* ---------- Kalender ---------- */
-.calendar-intro { margin-bottom: clamp(32px, 5vh, 56px); max-width: 58ch; text-wrap: pretty; }
+.calendar-intro { margin: 0 auto clamp(40px, 6vh, 64px); max-width: 64ch; text-align: center; text-wrap: pretty; }
 
 /* Lijst per maand (kleine schermen) */
 .calendar {
