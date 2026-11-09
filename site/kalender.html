@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="nl-BE">
+<head>
+  <meta charset="utf-8">
+  <script>
+    // Toegang enkel met de code van de aftelpagina (zelfde hash als in ../index.html).
+    (function () {
+      var HASH = "de0a3a66b00d33d4ba1d18e54d6c8388ff5c002a2585706f4c38a5712fb0448a";
+      try { if (sessionStorage.getItem("icebar-site") !== HASH) location.replace("../?site"); }
+      catch (e) { location.replace("../?site"); }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Kalender | Ice Bar Knokke</title>
+  <meta name="description" content="Alle dj-avonden in de Ice Bar Knokke, van de opening op 27 november tot eind januari.">
+  <meta name="theme-color" content="#283c48">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <a class="skip" href="#inhoud">Naar de inhoud</a>
+  <header class="top" id="top">
+    <div class="bar">
+      <a class="brand" href="index.html" aria-label="Ice Bar Knokke, home"><img src="../assets/logo-icebar-wit.png" alt="" width="662" height="900"></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 26 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 1h26M0 9h26M0 17h26"/></svg>
+        Menu
+      </button>
+      <nav id="menu" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="kalender.html" aria-current="page">Kalender</a></li>
+          <li><a href="afterwork.html">Afterwork & business</a></li>
+          <li><a href="info.html">Info & FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="page-head">
+    <img class="bg" src="../assets/fotos/dag-lampjes.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+    <h1>Kalender</h1>
+  </div>
+
+  <main id="inhoud">
+    <section class="section">
+      <div class="wrap">
+        <div class="calendar" id="calendar">
+          <noscript><p>Zet JavaScript aan om de kalender te zien, of bel ons voor het programma.</p></noscript>
+        </div>
+        <p class="calendar-note">Op 31 december en 1 januari staat er geen dj gepland. Het programma kan nog veranderen.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img class="wordmark" src="../assets/logo-icebar-wit.png" alt="Ice Bar Knokke" width="662" height="900" loading="lazy">
+    <p>Van Bunnenplein, 8300 Knokke-Heist<br>BE0716.840.193<br>Made by Fête Sociale<br>&copy; Ice Bar 2026</p>
+    <a class="back" href="../">Naar de aftelpagina</a>
+  </footer>
+
+  <script src="../assets/programma.js"></script>
+  <script>
+    // Menu op kleine schermen
+    (function () {
+      const top = document.getElementById("top");
+      const btn = top.querySelector(".menu-btn");
+      btn.addEventListener("click", () => {
+        const open = top.classList.toggle("is-open");
+        document.body.classList.toggle("menu-open", open);
+        btn.setAttribute("aria-expanded", String(open));
+        btn.lastChild.textContent = open ? " Sluiten" : " Menu";
+      });
+      addEventListener("keydown", e => {
+        if (e.key === "Escape" && top.classList.contains("is-open")) btn.click();
+      });
+    })();
+
+    ICEBAR.renderCalendar(document.getElementById("calendar"));
+  </script>
+</body>
+</html>
