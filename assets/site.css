@@ -302,32 +302,27 @@ p { max-width: var(--measure); }
 .gallery {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 160px;
   gap: 12px;
 }
 
-.gallery img { width: 100%; height: 100%; object-fit: cover; }
+.gallery img { width: 100%; height: auto; object-fit: cover; display: block; }
 
-.gallery .a { grid-column: 1; grid-row: 1 / 3; }
-.gallery .b { grid-column: 2; grid-row: 1 / 3; }
-.gallery .c { grid-column: 3; grid-row: 1 / 5; }
-.gallery .d { grid-column: 1; grid-row: 3 / 5; }
-.gallery .e, .gallery .f { grid-column: 2; grid-row: 3; }
-.gallery .f { margin-left: calc(50% + 6px); }
-.gallery .e { margin-right: calc(50% + 6px); }
-.gallery .g { grid-column: 2; grid-row: 4; }
+.gallery .col { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.gallery .col > img { aspect-ratio: 4 / 3; }
+.gallery .col > img.fill { flex: 1; min-height: 0; aspect-ratio: auto; height: 0; }
+
+.gallery .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.gallery .pair img { aspect-ratio: 4 / 3; }
+
+.gallery .tall { position: relative; min-height: 0; }
+.gallery .tall img { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 @media (max-width: 760px) {
-  .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; gap: 8px; }
-  .gallery .a { grid-column: 1; grid-row: 1 / 3; }
-  .gallery .b { grid-column: 2; grid-row: 1 / 3; }
-  .gallery .c { grid-column: 1; grid-row: 3 / 6; }
-  .gallery .d { grid-column: 2; grid-row: 3 / 5; }
-  .gallery .e { grid-column: 2; grid-row: 5; margin: 0; }
-  .gallery .f { display: none; }
-  .gallery .g { grid-column: 1 / 3; grid-row: 6; }
-  .gallery .e { margin-right: 0; }
-  .gallery .f { margin-left: 0; }
+  .gallery { grid-template-columns: 1fr 1fr; grid-auto-flow: dense; gap: 8px; }
+  .gallery .col { display: contents; }
+  .gallery .col > img, .gallery .col > img.fill { flex: none; height: auto; aspect-ratio: 4 / 3; }
+  .gallery .pair { grid-column: 1 / -1; gap: 8px; }
+  .gallery .tall { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
 }
 
 /* ---------- Waar vind je ons ---------- */
@@ -347,6 +342,9 @@ p { max-width: var(--measure); }
 @media (max-width: 760px) { .find { grid-template-columns: 1fr; } }
 
 /* ---------- Kalender ---------- */
+.calendar-intro { margin-bottom: clamp(32px, 5vh, 56px); }
+
+/* Lijst per maand (kleine schermen) */
 .calendar {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -372,6 +370,58 @@ p { max-width: var(--measure); }
 .calendar .day small { font-size: .95rem; color: var(--ink-soft); }
 .calendar .is-past { color: var(--ink-soft); opacity: .55; }
 .calendar .is-today .who::after { content: " (vanavond)"; color: var(--ink-soft); }
+
+.who .tag, .upcoming .who .tag { display: block; font-size: .92rem; color: var(--ink-soft); }
+.upcoming .who .tag { text-align: right; }
+
+/* Maandraster (grote schermen) */
+.calendar-grid { display: none; }
+
+.month-grid + .month-grid { margin-top: clamp(48px, 7vh, 80px); }
+.month-grid h2 { font-size: clamp(1.9rem, 3vw, 2.4rem); margin-bottom: 18px; }
+
+.month-grid ol {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.month-grid li {
+  min-height: 104px;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.month-grid .wd {
+  min-height: 0;
+  padding: 0 12px 8px;
+  border: 0;
+  color: var(--ink-soft);
+  font-size: .95rem;
+}
+
+.month-grid .blank { border-color: transparent; }
+.month-grid .closed { color: var(--ink-soft); }
+.month-grid .closed .num { opacity: .55; }
+.month-grid .num { font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+
+.month-grid .open { background: var(--slate); border-color: var(--slate); color: var(--white); }
+.month-grid .open .act { margin-top: auto; font-size: 1.05rem; }
+.month-grid .open .tag { font-size: .88rem; color: var(--white-soft); }
+.month-grid .open.is-past { background: var(--cream-deep); border-color: var(--cream-deep); color: var(--ink-soft); }
+.month-grid .open.is-past .tag { color: var(--ink-soft); }
+.month-grid .is-today { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+@media (min-width: 761px) {
+  .calendar-grid { display: block; }
+  .calendar { display: none; }
+}
 
 .calendar-note { margin-top: 40px; color: var(--ink-soft); }
 

@@ -1,6 +1,6 @@
 // Programma Ice Bar Knokke, seizoen 2026-2027.
 // Eén bron voor de homepagina (eerstvolgende avonden) en de kalender.
-// Datum als JJJJ-MM-DD, acts in volgorde van de avond.
+// Datum als JJJJ-MM-DD, acts in volgorde van de avond, label voor feestdagen.
 window.ICEBAR = (function () {
   const EVENTS = [
     { d: "2026-11-27", acts: ["Opening", "DJ Steve DK"] },
@@ -18,13 +18,15 @@ window.ICEBAR = (function () {
     { d: "2026-12-21", acts: ["DJ Pipo"] },
     { d: "2026-12-22", acts: ["DJ Bart"] },
     { d: "2026-12-23", acts: ["DJ Nicolas"] },
-    { d: "2026-12-24", acts: ["DCK"] },
-    { d: "2026-12-25", acts: ["DJ Kees"] },
+    { d: "2026-12-24", label: "Kerstavond", acts: ["DCK"] },
+    { d: "2026-12-25", label: "Kerstdag", acts: ["DJ Kees"] },
     { d: "2026-12-26", acts: ["DJ Steve DK"] },
     { d: "2026-12-27", acts: ["DJ Arno"] },
     { d: "2026-12-28", acts: ["DCK"] },
     { d: "2026-12-29", acts: ["DJ Steve DK"] },
     { d: "2026-12-30", acts: ["DJ Bart"] },
+    { d: "2026-12-31", label: "Oudejaarsavond", acts: ["Apero"] },
+    { d: "2027-01-01", label: "Nieuwjaarsdag", acts: ["Nieuwjaarsapero"] },
     { d: "2027-01-02", acts: ["DJ Pipo"] },
     { d: "2027-01-03", acts: ["DJ Steve DK"] },
     { d: "2027-01-08", acts: ["DJ Nicolas"] },
@@ -59,6 +61,13 @@ window.ICEBAR = (function () {
     return e;
   };
 
+  function who(e) {
+    const span = el("span", "who");
+    if (e.label) span.appendChild(el("small", "tag", e.label));
+    span.appendChild(document.createTextNode(e.acts.join(" en ")));
+    return span;
+  }
+
   // Homepagina: de eerstvolgende avonden (vanaf vandaag), standaard drie.
   function renderUpcoming(container, count) {
     const today = todayKey();
@@ -73,27 +82,31 @@ window.ICEBAR = (function () {
       const time = el("time", "when", day[0].toUpperCase() + day.slice(1) + " " + dt.getDate() + " " + MONTHS[dt.getMonth()]);
       time.dateTime = e.d;
       li.appendChild(time);
-      li.appendChild(el("span", "who", e.acts.join(" en ")));
+      li.appendChild(who(e));
       container.appendChild(li);
     });
   }
 
-  // Kalender: één kolom per maand.
-  function renderCalendar(container) {
-    const today = todayKey();
+  // Kalender. Twee weergaven uit dezelfde data: een lijst per maand (kleine
+  // schermen) en een maandraster met de open dagen ingekleurd (grote schermen).
+  function groupByMonth() {
     const groups = new Map();
     EVENTS.forEach(e => {
       const k = e.d.slice(0, 7);
       if (!groups.has(k)) groups.set(k, []);
       groups.get(k).push(e);
     });
+    return groups;
+  }
+
+  const monthTitle = dt => MONTHS[dt.getMonth()][0].toUpperCase() + MONTHS[dt.getMonth()].slice(1) + " " + dt.getFullYear();
+
+  function renderCalendarList(container) {
+    const today = todayKey();
     container.textContent = "";
-    groups.forEach((list, k) => {
-      const first = parse(list[0].d);
+    groupByMonth().forEach(list => {
       const sec = el("section", "month");
-      const h = el("h2", null, MONTHS[first.getMonth()][0].toUpperCase() + MONTHS[first.getMonth()].slice(1) + " " + first.getFullYear());
-      h.id = "m-" + k;
-      sec.appendChild(h);
+      sec.appendChild(el("h2", null, monthTitle(parse(list[0].d))));
       const ol = el("ol");
       list.forEach(e => {
         const dt = parse(e.d);
@@ -105,12 +118,62 @@ window.ICEBAR = (function () {
         time.appendChild(el("b", null, String(dt.getDate()).padStart(2, "0")));
         time.appendChild(el("small", null, DAYS_SHORT[dt.getDay()]));
         li.appendChild(time);
-        li.appendChild(el("span", "who", e.acts.join(" en ")));
+        li.appendChild(who(e));
         ol.appendChild(li);
       });
       sec.appendChild(ol);
       container.appendChild(sec);
     });
+  }
+
+  function renderCalendarGrid(container) {
+    const today = todayKey();
+    const byDate = new Map(EVENTS.map(e => [e.d, e]));
+    container.textContent = "";
+    groupByMonth().forEach((list, k) => {
+      const first = parse(list[0].d);
+      const y = first.getFullYear(), m = first.getMonth();
+      const sec = el("section", "month-grid");
+      sec.appendChild(el("h2", null, monthTitle(first)));
+      const grid = el("ol");
+      ["ma", "di", "wo", "do", "vr", "za", "zo"].forEach(d => grid.appendChild(el("li", "wd", d)));
+      // In de eerste maand beginnen we bij de week van de opening, niet bij dag 1.
+      let start = 1;
+      if (k === EVENTS[0].d.slice(0, 7)) {
+        const firstOpen = parse(EVENTS[0].d);
+        start = firstOpen.getDate() - ((firstOpen.getDay() + 6) % 7);
+      }
+      const offset = (new Date(y, m, start).getDay() + 6) % 7;
+      for (let i = 0; i < offset; i++) grid.appendChild(el("li", "blank"));
+      const days = new Date(y, m + 1, 0).getDate();
+      for (let d = start; d <= days; d++) {
+        const key = y + "-" + String(m + 1).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+        const e = byDate.get(key);
+        const li = el("li", e ? "open" : "closed");
+        if (key < today) li.classList.add("is-past");
+        if (key === today) li.classList.add("is-today");
+        const time = el("time", "num", String(d));
+        time.dateTime = key;
+        li.appendChild(time);
+        if (e) {
+          if (e.label) li.appendChild(el("span", "tag", e.label));
+          li.appendChild(el("span", "act", e.acts.join(" en ")));
+        }
+        grid.appendChild(li);
+      }
+      sec.appendChild(grid);
+      container.appendChild(sec);
+    });
+  }
+
+  function renderCalendar(container) {
+    const list = el("div", "calendar");
+    const grid = el("div", "calendar-grid");
+    renderCalendarList(list);
+    renderCalendarGrid(grid);
+    container.textContent = "";
+    container.appendChild(grid);
+    container.appendChild(list);
   }
 
   // Band op de homepagina: aftellen tot de opening, daarna "we zijn open".
