@@ -40,7 +40,7 @@ window.ICEBAR = (function () {
     { d: "2027-01-24", acts: ["DJ Arno"] },
     { d: "2027-01-29", acts: ["DJ Steve DK"] },
     { d: "2027-01-30", acts: ["DJ Pipo"] },
-    { d: "2027-01-31", acts: ["DJ Bart", "DJ Nicolas"] }
+    { d: "2027-01-31", label: "Closing party", acts: ["DJ Bart", "DJ Nicolas"] }
   ];
 
   const OPENING = new Date("2026-11-27T12:00:00+01:00");
