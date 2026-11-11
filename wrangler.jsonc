@@ -1,0 +1,15 @@
+// Cloudflare Workers: de site bestaat enkel uit statische bestanden.
+// Deze configuratie is nodig zodat Workers Builds voor elke branch een preview
+// kan maken met `npx wrangler preview`. Productie blijft `npx wrangler deploy`.
+// De "name" moet overeenkomen met de naam van de bestaande Worker in het Cloudflare-dashboard.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "icebarknokke",
+  "compatibility_date": "2026-11-11",
+  "assets": {
+    "directory": "./",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "previews": {}
+}

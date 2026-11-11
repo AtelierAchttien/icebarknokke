@@ -2,3 +2,6 @@
 .agents/
 .claude/skills/
 skills-lock.json
+
+# Tijdelijke bestanden van wrangler
+.wrangler/
