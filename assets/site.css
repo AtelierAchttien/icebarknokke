@@ -245,15 +245,8 @@ p { max-width: var(--measure); }
 .span2 { grid-column: span 2; }
 .span3 { grid-column: span 3; }
 
-/* De hexcode links onderaan, zoals de kleurvlakken in de referentie. */
-.swatch { font-family: var(--display); font-size: 1.3rem; letter-spacing: .08em; text-transform: uppercase; opacity: .9; }
-
-/* Enkel de hertenkop uit het logo, zonder de letters eronder. */
-.stag { position: absolute; overflow: hidden; aspect-ratio: 662 / 715; pointer-events: none; }
-.stag img { width: 100%; height: auto; }
-
 /* Rij 1: titel, foto, logo */
-.hero-tile { justify-content: space-between; padding-top: calc(var(--pad) + 72px); gap: 28px; }
+.hero-tile { justify-content: space-between; padding-top: calc(var(--pad) + 72px); gap: 28px; min-height: clamp(460px, 60vh, 640px); }
 .hero-tile h1 { font-size: clamp(3.4rem, 7.4vw, 6.6rem); }
 .hero-tile .eyebrow { font-size: .85rem; letter-spacing: .18em; text-transform: uppercase; color: var(--white-soft); }
 .hero-tile .status { display: grid; gap: 6px; }
@@ -261,34 +254,27 @@ p { max-width: var(--measure); }
 .hero-tile .status [data-small] { color: var(--white-soft); font-size: 1rem; }
 .hero-tile .btn { align-self: flex-start; margin-top: 4px; }
 
-.logo-tile { justify-content: flex-end; min-height: 300px; }
-.logo-tile .stag { right: 12%; top: 50%; transform: translateY(-50%); height: 80%; max-height: 520px; }
 
-/* Rij 2: promotegels op foto, zoals de aanbiedingen in de referentie. */
-.promo { text-decoration: none; }
-.promo.photo { padding: var(--pad); }
-.promo.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31, 48, 58, .12) 25%, rgba(31, 48, 58, .82) 100%); }
-.promo > * { position: relative; z-index: 1; }
-.promo .corner { position: absolute; top: var(--pad); left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; gap: 12px; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+/* Rij 2: promotegels, de foto boven en de tekst in een vlak eronder. */
+.wall.promos { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: auto; }
+.tile.promo { padding: 0; gap: 0; justify-content: flex-start; text-decoration: none; background: var(--cream-deep); color: var(--ink); }
+.promo .pic { aspect-ratio: 4 / 3; overflow: hidden; max-width: 100%; }
+.promo .pic img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+.promo:hover .pic img, .promo:focus-visible .pic img { transform: scale(1.03); }
+.promo .txt { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: var(--pad); }
+.promo .corner { display: flex; justify-content: space-between; gap: 12px; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
 .promo h3 { font-family: var(--display); font-size: clamp(1.9rem, 2.5vw, 2.6rem); text-transform: uppercase; letter-spacing: .04em; line-height: .98; color: inherit; }
-.promo .sub { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
-.promo.photo { color: var(--white); }
-.promo.photo .corner, .promo.photo .sub { text-shadow: 0 1px 3px rgba(0, 0, 0, .4); }
-.promo.photo:hover img, .promo.photo:focus-visible img { transform: scale(1.03); }
-.promo.photo img { transition: transform .6s var(--ease); }
+.promo .sub { margin-top: auto; padding-top: 10px; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
+.promo .sub::after { content: " \2192"; }
+.promo.slate { background: var(--slate); color: var(--white); }
+.promo.slate .corner { color: var(--white-soft); }
+.promo.slate h3 { margin-block: auto; padding-block: 24px; }
 .promo.slate:hover, .promo.slate:focus-visible { background: var(--slate-deep); }
 
-/* Woordmerk-tegels */
-.wordmark { justify-content: center; padding-bottom: calc(var(--pad) + 40px); }
-.wordmark .word { font-size: clamp(2.6rem, 5.6vw, 5rem); position: relative; align-self: center; }
-.wordmark .word svg { position: absolute; width: .5em; height: .5em; right: -.75em; top: 0; }
-.wordmark .swatch { position: absolute; left: var(--pad); bottom: var(--pad); }
-.wordmark.deep .stag { right: 7%; top: 9%; height: 40%; max-height: 170px; opacity: .95; }
-
 /* Rij 3: eerstvolgende avonden, de datum zo groot als een prijskaartje. */
+.wall.nights { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .head-tile { justify-content: center; gap: 18px; }
-.head-tile h2 { font-size: clamp(1.5rem, 2.2vw, 2rem); letter-spacing: .02em; }
-.nights { display: contents; }
+.head-tile h2 { font-size: clamp(1.7rem, 2.4vw, 2.3rem); letter-spacing: .02em; }
 .head-tile .more { font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid currentColor; align-self: flex-start; padding-bottom: 2px; }
 .head-tile .more:hover { color: var(--amber); }
 
@@ -308,17 +294,21 @@ p { max-width: var(--measure); }
 .wall.photos { grid-auto-rows: minmax(clamp(200px, 22vw, 320px), auto); }
 
 @media (max-width: 860px) {
-  .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(200px, auto); }
+  .wall, .wall.promos, .wall.nights { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
   .span2, .span3 { grid-column: span 2; }
   .one { grid-column: span 1; }
   .hero-tile { padding-top: calc(var(--pad) + 80px); min-height: 70svh; }
   .hero-tile h1 { font-size: clamp(3.2rem, 14vw, 4.8rem); }
-  .logo-tile { min-height: 340px; }
-  .logo-tile .stag { right: 50%; transform: translate(50%, -50%); height: 76%; }
-  .promo h3 { font-size: 1.6rem; }
-  .night .date b { font-size: 3.8rem; }
-  .wall.photos { grid-auto-rows: minmax(180px, auto); }
-  .wall.photos .tile.photo { aspect-ratio: 4 / 3; }
+  .wall > .tile.photo { aspect-ratio: 4 / 3; }
+  .promo h3 { font-size: 1.5rem; }
+  .head-tile { grid-column: span 2; padding-block: 36px; }
+  .night { grid-column: span 2; flex-direction: row; align-items: center; justify-content: flex-start; gap: 24px; padding-block: 20px; }
+  .night .corner { display: none; }
+  .night .date b { font-size: 3.4rem; }
+  .night .date small { margin-top: 2px; }
+  .night + .night { border-top: 1px solid var(--rule); }
+  .wall.photos .tile.photo { grid-column: span 1; aspect-ratio: 1; }
+  .wall.photos .tile.photo:last-child { grid-column: span 2; aspect-ratio: 16 / 9; }
 }
 
 /* Kop op de andere pagina's: titeltegel naast foto. */

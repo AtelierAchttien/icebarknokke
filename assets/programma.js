@@ -43,12 +43,14 @@ window.ICEBAR = (function () {
     { d: "2027-01-31", label: "Closing party", acts: ["DJ Bart", "DJ Nicolas"] }
   ];
 
-  const OPENING = new Date("2026-11-27T12:00:00+01:00");
+  const OPENING = new Date("2026-11-27T17:00:00+01:00");
   const DAYS = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
   const DAYS_SHORT = ["zo", "ma", "di", "wo", "do", "vr", "za"];
   const MONTHS = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
 
   const parse = s => new Date(s + "T12:00:00");
+  // Vrijdag gaan de deuren open om 17u, alle andere dagen om 12u.
+  const openingHour = dt => dt.getDay() === 5 ? "17u" : "12u";
   const todayKey = () => {
     const n = new Date();
     return n.getFullYear() + "-" + String(n.getMonth() + 1).padStart(2, "0") + "-" + String(n.getDate()).padStart(2, "0");
@@ -108,9 +110,9 @@ window.ICEBAR = (function () {
       art.appendChild(time);
       const who = el("div", "who");
       who.appendChild(el("b", null, e.acts.join(" en ")));
-      who.appendChild(el("span", null, "Deuren open om 12u"));
+      who.appendChild(el("span", null, "Deuren open om " + openingHour(dt)));
       art.appendChild(who);
-      container.insertBefore(art, container.querySelector(".wordmark"));
+      container.appendChild(art);
     });
   }
 
@@ -211,13 +213,13 @@ window.ICEBAR = (function () {
     const small = container.querySelector("[data-small]");
     if (diff <= 0) {
       big.textContent = "We zijn open";
-      small.textContent = "Elke vrijdag, zaterdag en zondag vanaf 12u, op het Van Bunnenplein.";
+      small.textContent = "Vrijdag vanaf 17u, zaterdag en zondag vanaf 12u, op het Van Bunnenplein.";
     } else if (days === 1) {
       big.textContent = "Morgen gaan we open";
-      small.textContent = "Vrijdag 27 november vanaf 12u, op het Van Bunnenplein.";
+      small.textContent = "Vrijdag 27 november om 17u, op het Van Bunnenplein.";
     } else {
       big.textContent = "Nog " + days + " nachtjes slapen";
-      small.textContent = "We openen op vrijdag 27 november vanaf 12u. Zelfde plek, nieuw seizoen.";
+      small.textContent = "We openen op vrijdag 27 november om 17u. Zelfde plek, nieuw seizoen.";
     }
   }
 
