@@ -20,118 +20,137 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Italiana&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/site.css?v=2658d854">
-  <link rel="preload" as="image" href="../assets/hero.jpg" media="(min-width: 701px), (orientation: landscape)">
-  <link rel="preload" as="image" href="../assets/hero-mobile.jpg" media="(max-width: 700px) and (orientation: portrait)">
+  <link rel="stylesheet" href="../assets/site.css?v=ffdb55a6">
+  <link rel="preload" as="image" href="../assets/fotos/tent-avond.jpg">
 </head>
 <body>
   <a class="skip" href="#inhoud">Naar de inhoud</a>
   <header class="top" id="top">
     <div class="bar">
-      <a class="brand" href="index.html" aria-label="Ice Bar Knokke, home"><img src="../assets/logo-icebar-wit.png" alt="" width="662" height="900"></a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
-        <svg viewBox="0 0 26 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 1h26M0 9h26M0 17h26"/></svg>
-        Menu
-      </button>
-      <nav id="menu" aria-label="Hoofdmenu">
-        <ul>
+      <div class="pill">
+        <a class="brand" href="index.html" aria-label="Ice Bar Knokke, home"><img src="../assets/logo-icebar-wit.png" alt="" width="662" height="900">Ice Bar Knokke</a>
+        <nav id="menu" aria-label="Hoofdmenu">
+          <ul>
           <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="kalender.html">Kalender</a></li>
-          <li><a href="afterwork.html">Afterwork & business</a></li>
-          <li><a href="info.html">Info & FAQ</a></li>
+          <li><a href="afterwork.html">Afterwork &amp; business</a></li>
+          <li><a href="info.html">Info &amp; FAQ</a></li>
           <li><a href="sponsors.html">Sponsors</a></li>
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+          <svg viewBox="0 0 26 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 1h26M0 9h26M0 17h26"/></svg>
+          Menu
+        </button>
+      </div>
+      <a class="cta" href="afterwork.html#reserveren">Reserveer een tafel</a>
     </div>
   </header>
 
   <main id="inhoud">
-    <section class="hero">
-      <picture>
-        <source srcset="../assets/hero-mobile.jpg" media="(max-width: 700px) and (orientation: portrait)">
-        <img src="../assets/hero.jpg" alt="Het houten chalet van de Ice Bar op het Van Bunnenplein, met het uithangbord en de lichtjes" width="1920" height="1080" fetchpriority="high">
-      </picture>
-      <div class="inner">
-        <h1 class="visually-hidden">Ice Bar Knokke</h1>
-        <img class="wordmark" src="../assets/logo-icebar-wit.png" alt="" width="662" height="900">
+    <section class="wall" aria-label="Welkom">
+      <section class="tile slate hero-tile span2" id="status" aria-live="polite">
+        <p class="eyebrow">Winterbar in chaletstijl</p>
+        <h1 class="poster">Ice<br>Bar<br>Knokke</h1>
+        <div class="status">
+          <p data-big>Zelfde plek, nieuw seizoen</p>
+          <p data-small>We openen op vrijdag 27 november vanaf 12u op het Van Bunnenplein.</p>
+        </div>
         <a class="btn light" href="kalender.html">Bekijk de kalender</a>
+      </section>
+
+      <figure class="tile photo span2">
+        <img src="../assets/fotos/tent-avond.jpg" alt="Het verlichte chalet en de tent op het Van Bunnenplein bij avond" width="1536" height="1920" fetchpriority="high">
+      </figure>
+
+      <section class="tile deep logo-tile span2">
+        <div class="stag" aria-hidden="true"><img src="../assets/logo-icebar-wit.png" alt="" width="662" height="900" loading="lazy"></div>
+        <p class="swatch">#1F303A</p>
+      </section>
+
+      <a class="tile photo promo one" href="kalender.html">
+        <img src="../assets/fotos/bar-tap.jpg" alt="" width="1260" height="909" loading="lazy">
+        <span class="corner"><span>27 nov</span><span>12u</span></span>
+        <h3>Opening<br>party</h3>
+        <span class="sub">DJ Steve DK</span>
+      </a>
+
+      <a class="tile slate promo one" href="info.html">
+        <span class="corner"><span>Vr, za, zo</span></span>
+        <h3>Elk<br>weekend<br>open</h3>
+        <span class="sub">Vanaf 12u, Van Bunnenplein</span>
+      </a>
+
+      <a class="tile photo promo one" href="afterwork.html">
+        <img src="../assets/fotos/vrienden-proost.jpg" alt="" width="1260" height="948" loading="lazy">
+        <span class="corner"><span>Business</span><span>Afspraak</span></span>
+        <h3>Work hard<br>après<br>harder</h3>
+        <span class="sub">Boek een afterwork</span>
+      </a>
+
+      <a class="tile photo promo one" href="kalender.html">
+        <img src="../assets/fotos/proost-lantaarn.jpg" alt="" width="1278" height="909" loading="lazy">
+        <span class="corner"><span>31 dec</span><span>12u</span></span>
+        <h3>Oudejaars<br>apero</h3>
+        <span class="sub">Op 1 januari: nieuwjaarsapero</span>
+      </a>
+
+      <section class="tile paper wordmark span2">
+        <p class="word poster">Ice<br>Bar<br>Knokke<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 12h6M12 3v6M8 7l3 3M16 7l-3 3"/></svg></p>
+        <p class="swatch">#E9E3DE</p>
+      </section>
+
+      <section class="tile slate head-tile one">
+        <h2 class="poster">Komende<br>avonden</h2>
+        <a class="more" href="kalender.html">Volledige kalender</a>
+      </section>
+      <div class="nights" id="upcoming">
+        <article class="tile night one"><div class="corner"><span>Vrijdag</span><span class="tag">Opening</span></div><time class="date" datetime="2026-11-27"><b>27</b><small>november</small></time><div class="who"><b>Opening en DJ Steve DK</b><span>Deuren open om 12u</span></div></article>
+        <article class="tile night one"><div class="corner"><span>Zaterdag</span></div><time class="date" datetime="2026-11-28"><b>28</b><small>november</small></time><div class="who"><b>DJ Arno</b><span>Deuren open om 12u</span></div></article>
+        <article class="tile night one"><div class="corner"><span>Zondag</span></div><time class="date" datetime="2026-11-29"><b>29</b><small>november</small></time><div class="who"><b>DJ Nicolas</b><span>Deuren open om 12u</span></div></article>
+        <section class="tile deep wordmark span2">
+          <p class="word poster">Ice<br>Bar<br>Knokke</p>
+          <div class="stag" aria-hidden="true"><img src="../assets/logo-icebar-wit.png" alt="" width="662" height="900" loading="lazy"></div>
+          <p class="swatch">#283C48</p>
+        </section>
       </div>
     </section>
 
-    <section class="band" id="status" aria-live="polite">
-      <p class="statement" data-big>Zelfde plek, nieuw seizoen</p>
-      <p data-small>We openen op vrijdag 27 november vanaf 12u op het Van Bunnenplein.</p>
-    </section>
-
-    <section class="section upcoming">
-      <div class="narrow">
-        <h2 class="section-title">Eerstvolgende avonden</h2>
-        <ol id="upcoming">
-          <li><time class="when" datetime="2026-11-27">Vrijdag 27 november</time><span class="who">Opening en DJ Steve DK</span></li>
-          <li><time class="when" datetime="2026-11-28">Zaterdag 28 november</time><span class="who">DJ Arno</span></li>
-          <li><time class="when" datetime="2026-11-29">Zondag 29 november</time><span class="who">DJ Nicolas</span></li>
-        </ol>
-        <a class="btn" href="kalender.html">Volledige kalender</a>
-      </div>
+    <section class="wall photos" aria-label="Sfeerbeelden">
+      <figure class="tile photo span2"><img src="../assets/fotos/bar-sfeer.jpg" alt="De toog van het chalet in warm licht" width="612" height="459" loading="lazy"></figure>
+      <figure class="tile photo span2"><img src="../assets/fotos/terras.jpg" alt="Het terras met hoge tafels en krukken" width="618" height="459" loading="lazy"></figure>
+      <figure class="tile photo span2"><img src="../assets/fotos/kerstboom.jpg" alt="Kerstbomen met lichtjes naast een stapel brandhout" width="1278" height="453" loading="lazy"></figure>
     </section>
 
     <section class="section">
       <div class="wrap">
-        <h2 class="section-title">Je winterplannen beginnen hier</h2>
-        <div class="gallery">
-          <div class="col">
-            <img src="../assets/fotos/bar-tap.jpg" alt="Een tapper schenkt een glas aan de bar terwijl twee vriendinnen lachen" width="1260" height="909" loading="lazy">
-            <img class="fill" src="../assets/fotos/vrienden-proost.jpg" alt="Een groep vrienden heft het glas aan de bar" width="1260" height="948" loading="lazy">
-          </div>
-          <div class="col">
-            <img src="../assets/fotos/proost-lantaarn.jpg" alt="Twee mensen klinken met warme dranken naast een lantaarn" width="1278" height="909" loading="lazy">
-            <div class="pair">
-              <img src="../assets/fotos/bar-sfeer.jpg" alt="De toog van het chalet in warm licht" width="612" height="459" loading="lazy">
-              <img src="../assets/fotos/terras.jpg" alt="Het terras met hoge tafels en krukken" width="618" height="459" loading="lazy">
-            </div>
-            <img class="fill" src="../assets/fotos/kerstboom.jpg" alt="Kerstbomen met lichtjes naast een stapel brandhout" width="1278" height="453" loading="lazy">
-          </div>
-          <div class="tall">
-            <img src="../assets/fotos/mi-casa.jpg" alt="Houten deur met de tekst Mi Casa en een slinger van dennengroen" width="1317" height="1908" loading="lazy">
+        <h2 class="section-title poster">Waar vind je ons?</h2>
+        <div class="find">
+          <img class="map" src="../assets/fotos/kaart.jpg" alt="Kaart van het centrum van Knokke met het Van Bunnenplein aangeduid" width="1569" height="1269" loading="lazy">
+          <div>
+            <h3>Openingsuren</h3>
+            <p>Elke vrijdag, zaterdag en zondag vanaf 12u. In de kerstvakantie en op feestdagen kunnen de uren afwijken. De dj-avonden en speciale avonden vind je in de <a href="kalender.html">kalender</a>.</p>
+            <h3>Adres</h3>
+            <p>Van Bunnenplein, 8300 Knokke-Heist</p>
+            <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Van+Bunnenplein+Knokke-Heist" target="_blank" rel="noopener">Route</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="band on-dark">
-      <p class="statement">Work hard. Après harder.</p>
-      <p>Een afterwork met je team? Wij hebben de plek.</p>
-      <a class="btn" href="afterwork.html#reserveren">Boek een tafel</a>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <h2 class="section-title">Waar vind je ons?</h2>
-      <div class="find">
-        <img class="map" src="../assets/fotos/kaart.jpg" alt="Kaart van het centrum van Knokke met het Van Bunnenplein aangeduid" width="1569" height="1269" loading="lazy">
-        <div>
-          <h3>Openingsuren</h3>
-          <p>Elke vrijdag, zaterdag en zondag vanaf 12u. In de kerstvakantie en op feestdagen kunnen de uren afwijken. De dj-avonden en speciale avonden vind je in de <a href="kalender.html">kalender</a>.</p>
-          <h3>Adres</h3>
-          <p>Van Bunnenplein, 8300 Knokke-Heist</p>
-          <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Van+Bunnenplein+Knokke-Heist" target="_blank" rel="noopener">Route</a>
-        </div>
-      </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <img class="wordmark" src="../assets/logo-icebar-wit.png" alt="Ice Bar Knokke" width="662" height="900" loading="lazy">
-    <p>Van Bunnenplein, 8300 Knokke-Heist<br><a href="mailto:icebarknokkexl@gmail.com">icebarknokkexl@gmail.com</a><br>BE0716.840.193<br>Made by <a href="https://fetesociale.be/" target="_blank" rel="noopener">Fête Sociale</a><br>&copy; Ice Bar 2026</p>
-    <ul class="socials">
-      <li><a href="https://www.instagram.com/icebarknokke/" target="_blank" rel="noopener" aria-label="Ice Bar Knokke op Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg></a></li>
-      <li><a href="https://www.facebook.com/IcebarKnokkeXL" target="_blank" rel="noopener" aria-label="Ice Bar Knokke op Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg></a></li>
-    </ul>
-    <a class="back" href="../">Naar de aftelpagina</a>
+    <p class="sign poster">Tot straks<br>in het chalet</p>
+    <div class="meta">
+      <p>Van Bunnenplein, 8300 Knokke-Heist<br><a href="mailto:icebarknokkexl@gmail.com">icebarknokkexl@gmail.com</a><br>BE0716.840.193<br>Made by <a href="https://fetesociale.be/" target="_blank" rel="noopener">Fête Sociale</a><br>&copy; Ice Bar 2026</p>
+      <ul class="socials">
+        <li><a href="https://www.instagram.com/icebarknokke/" target="_blank" rel="noopener" aria-label="Ice Bar Knokke op Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg></a></li>
+        <li><a href="https://www.facebook.com/IcebarKnokkeXL" target="_blank" rel="noopener" aria-label="Ice Bar Knokke op Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg></a></li>
+      </ul>
+      <a class="back" href="../">Naar de aftelpagina</a>
+    </div>
   </footer>
-
-  <script src="../assets/programma.js?v=29cb72f2"></script>
+  <script src="../assets/programma.js?v=8d0af561"></script>
   <script>
     // Menu op kleine schermen
     (function () {
@@ -149,7 +168,7 @@
     })();
 
     ICEBAR.renderStatus(document.getElementById("status"));
-    ICEBAR.renderUpcoming(document.getElementById("upcoming"), 3);
+    ICEBAR.renderNights(document.getElementById("upcoming"), 3);
   </script>
 </body>
 </html>

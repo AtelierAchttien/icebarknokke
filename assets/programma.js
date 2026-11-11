@@ -87,6 +87,33 @@ window.ICEBAR = (function () {
     });
   }
 
+  // Homepagina: dezelfde avonden als tegels, met de datum zo groot als een prijskaartje.
+  function renderNights(container, count) {
+    const today = todayKey();
+    let list = EVENTS.filter(e => e.d >= today).slice(0, count || 3);
+    if (!list.length) list = EVENTS.slice(-(count || 3));
+    container.querySelectorAll(".night").forEach(n => n.remove());
+    list.forEach(e => {
+      const dt = parse(e.d);
+      const art = el("article", "tile night one");
+      if (e.d === today) art.classList.add("is-today");
+      const corner = el("div", "corner");
+      corner.appendChild(el("span", null, DAYS[dt.getDay()]));
+      if (e.label) corner.appendChild(el("span", "tag", e.label));
+      art.appendChild(corner);
+      const time = el("time", "date");
+      time.dateTime = e.d;
+      time.appendChild(el("b", null, String(dt.getDate())));
+      time.appendChild(el("small", null, MONTHS[dt.getMonth()]));
+      art.appendChild(time);
+      const who = el("div", "who");
+      who.appendChild(el("b", null, e.acts.join(" en ")));
+      who.appendChild(el("span", null, "Deuren open om 12u"));
+      art.appendChild(who);
+      container.insertBefore(art, container.querySelector(".wordmark"));
+    });
+  }
+
   // Kalender. Twee weergaven uit dezelfde data: een lijst per maand (kleine
   // schermen) en een maandraster met de open dagen ingekleurd (grote schermen).
   function groupByMonth() {
@@ -194,5 +221,5 @@ window.ICEBAR = (function () {
     }
   }
 
-  return { EVENTS, OPENING, renderUpcoming, renderCalendar, renderStatus };
+  return { EVENTS, OPENING, renderUpcoming, renderNights, renderCalendar, renderStatus };
 })();
