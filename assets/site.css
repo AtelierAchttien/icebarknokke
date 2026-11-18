@@ -568,6 +568,32 @@ footer .back { display: inline-block; margin-top: 28px; font-size: .92rem; color
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 
+/* ---------- Beweging ----------
+   Bewust weinig: alleen waar het de aandacht helpt richten. Wie in zijn toestel
+   "minder beweging" kiest, krijgt niets hiervan (zie de regel onderaan). */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+/* 1. Homepagina: logo, adresregel en knop komen na elkaar in beeld. */
+.hero .inner > * { animation: rise .9s var(--ease) both; }
+.hero .inner > .wordmark { animation-delay: .1s; }
+.hero .inner > .hero-info { animation-delay: .3s; }
+.hero .inner > .btn { animation-delay: .5s; }
+
+/* 2. Bevestiging na het formulier schuift in beeld. */
+.form-status.is-success { animation: rise .5s var(--ease) both; }
+
+/* 3. Antwoord op een veelgestelde vraag klapt zacht open. */
+.faq details[open] .answer { animation: reveal .3s var(--ease) both; }
+
+/* 4. Foto's en sponsorlogo's reageren licht op de muis. */
+.gallery img { transition: filter .4s var(--ease); }
+.logo-grid img { transition: transform .3s var(--ease); }
+@media (hover: hover) {
+  .gallery img:hover { filter: brightness(1.08) saturate(1.06); }
+  .logo-grid a:hover img { transform: scale(1.05); }
+}
+
 /* ---------- Cookiemelding ---------- */
 .cookies {
   position: fixed;
