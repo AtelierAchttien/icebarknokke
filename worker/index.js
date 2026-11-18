@@ -5,6 +5,8 @@
 // Instellingen:
 //   MAIL_TO, MAIL_FROM, MAILGUN_DOMAIN, SITE_URL  staan in wrangler.jsonc
 //   MAILGUN_API_KEY                      is een secret in het Cloudflare-dashboard
+//   TURNSTILE_SECRET                     secret van de Turnstile-controle tegen spam;
+//                                        de bijhorende sitekey staat in afterwork.html
 
 import { mailSubject, mailText, mailHtml } from "./mail.js";
 
@@ -43,6 +45,21 @@ function readForm(input) {
   return { data };
 }
 
+// Vraagt aan Cloudflare of de onzichtbare controle in het formulier geslaagd is.
+async function passedTurnstile(token, request, env) {
+  if (typeof token !== "string" || !token || token.length > 2048) return false;
+  const body = new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token });
+  const ip = request.headers.get("CF-Connecting-IP");
+  if (ip) body.set("remoteip", ip);
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body });
+    return (await res.json()).success === true;
+  } catch (e) {
+    console.error("Turnstile niet bereikbaar", e);
+    return false;
+  }
+}
+
 async function handleReservation(request, env) {
   if (request.method !== "POST") return json({ ok: false, error: "Alleen POST." }, 405);
 
@@ -63,6 +80,10 @@ async function handleReservation(request, env) {
 
   const { data, error } = readForm(input);
   if (error) return json({ ok: false, error }, 400);
+
+  if (env.TURNSTILE_SECRET && !(await passedTurnstile(input.turnstile, request, env))) {
+    return json({ ok: false, code: "controle", error: "De controle tegen spam is niet gelukt." }, 403);
+  }
 
   if (!env.MAILGUN_API_KEY) return json({ ok: false, error: "Mail is nog niet ingesteld." }, 503);
 

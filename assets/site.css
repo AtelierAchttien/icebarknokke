@@ -475,6 +475,8 @@ p { max-width: var(--measure); }
 .form-status.is-success { margin-top: 28px; padding: 22px 26px; background: var(--white); border: 1px solid var(--ink); border-left-width: 6px; }
 .form-status.is-success strong { display: block; margin-bottom: 8px; font-family: var(--display); font-weight: 400; font-size: 1.7rem; line-height: 1.1; letter-spacing: .03em; text-transform: uppercase; }
 .hp { position: absolute; left: -9999px; }
+.cf-turnstile:empty { display: none; }
+.cf-turnstile { margin-top: 8px; }
 
 /* ---------- Sponsors ---------- */
 .band.sponsors { text-align: center; }

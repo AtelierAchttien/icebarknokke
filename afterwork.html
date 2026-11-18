@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Belleza&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=e047f46a">
+  <link rel="stylesheet" href="/assets/site.css?v=5d853c7c">
   <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -148,6 +148,7 @@
             <p class="error" id="opmerkingen-error"></p>
           </div>
           <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <div class="cf-turnstile wide" data-sitekey="0x4AAAAAAGG7qMM5LzsFtW27" data-language="nl" data-theme="light" data-appearance="interaction-only" data-response-field-name="turnstile"></div>
           <div class="form-foot wide">
             <button class="btn btn-solid" type="submit">Vraag je tafel aan</button>
             <small>Je reservatie is pas definitief na bevestiging door ons team.</small>
@@ -168,6 +169,7 @@
     <a class="back" href="#" data-cookies>Cookievoorkeuren</a>
   </footer>
 
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script src="/assets/programma.js?v=f73cd418"></script>
   <script src="/assets/meten.js?v=b55d4b3d"></script>
   <script>
@@ -236,8 +238,10 @@
         btn.textContent = "Even geduld";
         const data = Object.fromEntries(new FormData(form).entries());
         delete data.website;
+        let failure = "Verzenden is niet gelukt. Probeer het nog eens, of mail naar icebarknokkexl@gmail.com.";
         try {
           const res = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+          if (res.status === 403 || res.status === 429) failure = "De controle tegen spam is niet gelukt. Wacht even en probeer het opnieuw, of mail naar icebarknokkexl@gmail.com.";
           if (!res.ok) throw new Error(res.status);
           window.ICEBAR_METEN("generate_lead", { form_name: "tafelaanvraag", personen: Number(data.personen), datum: data.datum });
           form.reset();
@@ -249,8 +253,10 @@
         } catch (err) {
           window.ICEBAR_METEN("form_error", { form_name: "tafelaanvraag" });
           status.classList.add("is-error");
-          status.textContent = "Verzenden is niet gelukt. Probeer het nog eens, of mail naar icebarknokkexl@gmail.com.";
+          status.textContent = failure;
         } finally {
+          // Een controlecode is maar één keer geldig, dus telkens een nieuwe vragen.
+          if (window.turnstile) window.turnstile.reset();
           btn.disabled = false;
           btn.textContent = "Vraag je tafel aan";
         }
