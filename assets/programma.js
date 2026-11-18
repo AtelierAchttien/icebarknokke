@@ -43,7 +43,7 @@ window.ICEBAR = (function () {
     { d: "2027-01-31", label: "Closing party", acts: ["DJ Bart", "DJ Nicolas"] }
   ];
 
-  const OPENING = new Date("2026-11-27T12:00:00+01:00");
+  const OPENING = new Date("2026-11-27T18:00:00+01:00");
   const DAYS = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
   const DAYS_SHORT = ["zo", "ma", "di", "wo", "do", "vr", "za"];
   const MONTHS = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
@@ -187,10 +187,10 @@ window.ICEBAR = (function () {
       small.textContent = "Elke vrijdag, zaterdag en zondag vanaf 12u, op het Van Bunnenplein.";
     } else if (days === 1) {
       big.textContent = "Morgen gaan we open";
-      small.textContent = "Vrijdag 27 november vanaf 12u, op het Van Bunnenplein.";
+      small.textContent = "Vrijdag 27 november vanaf 18u, op het Van Bunnenplein.";
     } else {
       big.textContent = "Nog " + days + " nachtjes slapen";
-      small.textContent = "We openen op vrijdag 27 november vanaf 12u. Zelfde plek, nieuw seizoen.";
+      small.textContent = "We openen op vrijdag 27 november vanaf 18u. Zelfde plek, nieuw seizoen.";
     }
   }
 
