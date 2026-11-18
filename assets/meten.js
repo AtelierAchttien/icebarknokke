@@ -1,6 +1,5 @@
-// Metingen voor Google Tag Manager (container GTM-KKGQQDHX).
-// Elke actie hieronder komt als gebeurtenis in de dataLayer terecht. In Tag Manager
-// hang je er een GA4-gebeurtenis aan met een trigger "Aangepaste gebeurtenis".
+// Metingen voor Google Analytics, via de Google-tag in de kop van elke pagina.
+// Elke actie hieronder wordt als gebeurtenis naar Analytics gestuurd.
 //
 //   generate_lead   tafelaanvraag verstuurd (de belangrijkste conversie)
 //   form_start      iemand begint het reservatieformulier in te vullen
@@ -12,7 +11,7 @@
 //   cta_click       klik op een knop naar de DJ line-up of naar het reserveren
 window.dataLayer = window.dataLayer || [];
 window.ICEBAR_METEN = function (event, params) {
-  window.dataLayer.push(Object.assign({ event: event }, params || {}));
+  if (typeof window.gtag === "function") window.gtag("event", event, params || {});
 };
 
 document.addEventListener("click", function (e) {
