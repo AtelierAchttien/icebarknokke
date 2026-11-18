@@ -194,5 +194,11 @@ window.ICEBAR = (function () {
     }
   }
 
-  return { EVENTS, OPENING, renderUpcoming, renderCalendar, renderStatus };
+  // Regel onder het logo op de homepagina: adres plus opening, na de opening de uren.
+  function renderHeroInfo(container) {
+    if (OPENING - Date.now() > 0) return;
+    container.lastChild.textContent = "Vrijdag, zaterdag en zondag vanaf 12u";
+  }
+
+  return { EVENTS, OPENING, renderUpcoming, renderCalendar, renderStatus, renderHeroInfo };
 })();
