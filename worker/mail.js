@@ -1,11 +1,11 @@
 // Opmaak van de mail met een tafelaanvraag, in de stijl van de site:
-// zwarte banden, crèmekleurig papier, sierlijke titels.
+// zwarte banden, crèmekleurig papier, smalle vette titels.
 // Mailprogramma's kennen weinig CSS, vandaar tabellen en stijlen per element.
 
 const DAYS = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
 const MONTHS = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
 
-const SERIF = "Italiana, 'Cormorant Garamond', Georgia, 'Times New Roman', serif";
+const TITLE = "'Bebas Neue', Oswald, 'Arial Narrow', Impact, Arial, sans-serif";
 const SANS = "Belleza, 'Gill Sans', 'Trebuchet MS', Arial, sans-serif";
 const BLACK = "#121212";
 const CREAM = "#f3efec";
@@ -61,7 +61,7 @@ export function mailHtml(data, siteUrl) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
 <title>Tafelaanvraag</title>
-<style>@import url("https://fonts.googleapis.com/css2?family=Belleza&family=Italiana&display=swap");</style>
+<style>@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Belleza&display=swap");</style>
 </head>
 <body style="margin:0;padding:0;background:#e9e3de;">
 <div style="display:none;max-height:0;overflow:hidden;">${esc(data.naam)}, ${esc(persons)}, ${esc(formatWhen(data.datum, data.uur))}</div>
@@ -70,12 +70,12 @@ export function mailHtml(data, siteUrl) {
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background:${CREAM};">
 
 <tr><td align="center" bgcolor="${BLACK}" style="background:${BLACK};padding:36px 24px 30px;">
-<img src="${siteUrl}/assets/logo-icebar-wit.png" width="84" height="114" alt="Ice Bar Knokke" style="display:block;border:0;width:84px;height:auto;font-family:${SERIF};font-size:22px;color:#ffffff;">
+<img src="${siteUrl}/assets/logo-icebar-wit.png" width="84" height="114" alt="Ice Bar Knokke" style="display:block;border:0;width:84px;height:auto;font-family:${TITLE};font-size:22px;color:#ffffff;">
 <p style="margin:22px 0 0;font-family:${SANS};font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#c9c9c9;">Afterwork &amp; business</p>
 </td></tr>
 
 <tr><td style="padding:40px 36px 8px;">
-<h1 style="margin:0;font-family:${SERIF};font-weight:400;font-size:34px;line-height:1.1;color:${BLACK};">Nieuwe tafelaanvraag</h1>
+<h1 style="margin:0;font-family:${TITLE};font-weight:400;font-size:38px;line-height:1;letter-spacing:1px;text-transform:uppercase;color:${BLACK};">Nieuwe tafelaanvraag</h1>
 <p style="margin:14px 0 0;font-family:${SANS};font-size:18px;line-height:1.5;color:${BLACK};">${esc(data.naam)} vraagt een tafel voor ${esc(persons)} op ${esc(formatWhen(data.datum, data.uur))}.</p>
 </td></tr>
 

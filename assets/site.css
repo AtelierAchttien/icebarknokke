@@ -1,6 +1,6 @@
 /* Ice Bar Knokke, volledige site.
    Gebaseerd op het Canva-webdesign: crèmekleurig papier, zwarte banden,
-   één contrastrijke display-letter (Italiana) en één brede tekstletter (Belleza). */
+   één smalle, vette titelletter zoals "ICE BAR" in het logo (Bebas Neue) en één brede tekstletter (Belleza). */
 
 :root {
   --cream: #f3efec;
@@ -13,7 +13,7 @@
   --white: #fff;
   --white-soft: rgba(255, 255, 255, .78);
   --rule-light: rgba(255, 255, 255, .22);
-  --display: "Italiana", "Cormorant Garamond", Georgia, serif;
+  --display: "Bebas Neue", "Oswald", "Arial Narrow", Impact, sans-serif;
   --text: "Belleza", "Gill Sans", "Trebuchet MS", sans-serif;
   --gutter: 24px;
   --gutter: clamp(16px, 5vw, 56px);
@@ -60,6 +60,7 @@ h1, h2, h3 { font-weight: 400; line-height: 1.05; letter-spacing: .01em; text-wr
 
 h1 { font-family: var(--display); font-size: clamp(2.8rem, 7vw, 5.2rem); }
 h2 { font-family: var(--display); font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
+h1, h2, .band .statement { text-transform: uppercase; letter-spacing: .03em; line-height: 1; }
 h3 { font-family: var(--text); font-size: 1.35rem; line-height: 1.25; }
 
 p { max-width: var(--measure); }
