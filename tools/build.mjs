@@ -117,9 +117,15 @@ ${EVENTS.map(line).join("\n")}
 `);
 
 // 4. sitemap.xml
+// Datum van de laatste wijziging per pagina uit git, anders vandaag.
+import { execFileSync } from "node:child_process";
 const today = new Date().toISOString().slice(0, 10);
-const urls = [["/", "1.0"], ["/kalender", "0.9"], ["/afterwork", "0.8"], ["/info", "0.7"], ["/sponsors", "0.4"]];
+const changed = file => {
+  try { return execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { cwd: root, encoding: "utf8" }).trim() || today; }
+  catch (e) { return today; }
+};
+const urls = [["/", "index.html", "1.0"], ["/kalender", "assets/programma.js", "0.9"], ["/afterwork", "afterwork.html", "0.8"], ["/info", "info.html", "0.7"], ["/sponsors", "sponsors.html", "0.4"]];
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  urls.map(([u, pr]) => "  <url><loc>" + BASE + u + "</loc><lastmod>" + today + "</lastmod><priority>" + pr + "</priority></url>").join("\n") + "\n</urlset>\n");
+  urls.map(([u, file, pr]) => "  <url><loc>" + BASE + u + "</loc><lastmod>" + changed(file) + "</lastmod><priority>" + pr + "</priority></url>").join("\n") + "\n</urlset>\n");
 
 console.log("Bijgewerkt: kalender.html, llms.txt, sitemap.xml (" + EVENTS.length + " avonden)");

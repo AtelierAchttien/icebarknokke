@@ -6,6 +6,8 @@
   "name": "icebarknokke",
   "main": "worker/index.js",
   "compatibility_date": "2026-11-04",
+  // Bij elke uitrol: kalendertekst, sitemap en llms.txt opnieuw maken uit het programma.
+  "build": { "command": "node tools/build.mjs" },
   "observability": { "enabled": true },
   // Variabelen en secrets die in het Cloudflare-dashboard zijn toegevoegd (zoals
   // MAILGUN_API_KEY) blijven staan bij elke nieuwe uitrol.

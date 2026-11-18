@@ -555,3 +555,25 @@ footer .back { display: inline-block; margin-top: 28px; font-size: .92rem; color
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ---------- Cookiemelding ---------- */
+.cookies {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 32px;
+  padding: 20px var(--gutter);
+  background: var(--slate);
+  color: var(--white);
+  border-top: 1px solid var(--rule-light);
+}
+.cookies p { max-width: 62ch; font-size: .98rem; line-height: 1.5; color: var(--white-soft); }
+.cookies div { display: flex; gap: 12px; }
+.cookies .btn { min-height: 44px; padding: 0 22px; }
+footer .back { background: none; border: 0; cursor: pointer; }
