@@ -4,6 +4,7 @@
 .assetsignore
 wrangler.jsonc
 worker
+tools
 .agents
 .claude
 skills-lock.json

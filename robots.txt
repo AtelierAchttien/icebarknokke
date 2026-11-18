@@ -1,0 +1,6 @@
+# Ice Bar Knokke: alles mag doorzocht worden, ook door AI-assistenten.
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://icebarknokke.be/sitemap.xml
