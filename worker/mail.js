@@ -27,6 +27,7 @@ function rows(data) {
   const list = [
     ["Naam", esc(data.naam)],
     data.bedrijf && ["Bedrijf", esc(data.bedrijf)],
+    data.btw && ["Btw-nummer", esc(data.btw)],
     ["E-mail", '<a href="mailto:' + esc(data.email) + '" style="color:' + BLACK + ';">' + esc(data.email) + "</a>"],
     ["Telefoon", '<a href="tel:' + esc(data.telefoon.replace(/[^\d+]/g, "")) + '" style="color:' + BLACK + ';">' + esc(data.telefoon) + "</a>"],
     ["Wanneer", esc(formatWhen(data.datum, data.uur))],

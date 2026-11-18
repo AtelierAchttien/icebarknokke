@@ -442,13 +442,19 @@ p { max-width: var(--measure); }
 /* ---------- Formulier ---------- */
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 22px 20px;
 }
 
+/* Zes kolommen: een gewoon veld neemt er twee (drie velden per rij), een half veld drie. */
+.form-grid > * { grid-column: span 2; }
+.form-grid .half { grid-column: span 3; }
 .form-grid .wide { grid-column: 1 / -1; }
 
-@media (max-width: 760px) { .form-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid > *, .form-grid .half { grid-column: 1 / -1; }
+}
 
 .field label { display: block; margin-bottom: 8px; font-size: 1rem; }
 .field label abbr { text-decoration: none; }

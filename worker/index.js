@@ -13,6 +13,7 @@ import { mailSubject, mailText, mailHtml } from "./mail.js";
 const FIELDS = {
   naam: { label: "Naam", required: true, max: 120 },
   bedrijf: { label: "Bedrijf", max: 120 },
+  btw: { label: "Btw-nummer", max: 20 },
   email: { label: "E-mail", required: true, max: 200 },
   telefoon: { label: "Telefoon", required: true, max: 40 },
   datum: { label: "Datum", required: true, max: 10 },

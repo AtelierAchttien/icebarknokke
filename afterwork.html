@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Belleza&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=79755a09">
+  <link rel="stylesheet" href="/assets/site.css?v=93ee0bd1">
   <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -113,19 +113,24 @@
             <p class="error" id="naam-error"></p>
           </div>
           <div class="field">
-            <label for="bedrijf">Bedrijfsnaam</label>
+            <label for="bedrijf">Bedrijfsnaam (optioneel)</label>
             <input id="bedrijf" name="bedrijf" type="text" autocomplete="organization">
             <p class="error" id="bedrijf-error"></p>
           </div>
           <div class="field">
-            <label for="email">E-mailadres <abbr title="verplicht">*</abbr></label>
-            <input id="email" name="email" type="email" required autocomplete="email" inputmode="email">
-            <p class="error" id="email-error"></p>
+            <label for="btw">Btw-nummer (optioneel)</label>
+            <input id="btw" name="btw" type="text" maxlength="20" autocomplete="off" placeholder="BE0123.456.789">
+            <p class="error" id="btw-error"></p>
           </div>
-          <div class="field wide">
+          <div class="field half">
             <label for="telefoon">Telefoonnummer <abbr title="verplicht">*</abbr></label>
             <input id="telefoon" name="telefoon" type="tel" required autocomplete="tel" inputmode="tel">
             <p class="error" id="telefoon-error"></p>
+          </div>
+          <div class="field half">
+            <label for="email">E-mailadres <abbr title="verplicht">*</abbr></label>
+            <input id="email" name="email" type="email" required autocomplete="email" inputmode="email">
+            <p class="error" id="email-error"></p>
           </div>
           <div class="field">
             <label for="datum">Datum <abbr title="verplicht">*</abbr></label>
