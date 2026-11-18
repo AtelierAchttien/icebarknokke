@@ -7,6 +7,9 @@
   "main": "worker/index.js",
   "compatibility_date": "2026-11-04",
   "observability": { "enabled": true },
+  // Variabelen en secrets die in het Cloudflare-dashboard zijn toegevoegd (zoals
+  // MAILGUN_API_KEY) blijven staan bij elke nieuwe uitrol.
+  "keep_vars": true,
   "assets": {
     "directory": "./",
     "binding": "ASSETS",
