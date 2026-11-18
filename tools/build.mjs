@@ -93,7 +93,7 @@ write("llms.txt", `# Ice Bar Knokke
 
 - Adres: Van Bunnenplein, 8300 Knokke-Heist, België
 - Opening: ${DAYS[firstP.wd]} ${firstP.d} ${MONTHS[firstP.m - 1]} ${firstP.y} om ${OPENING.getUTCHours() + 1}u
-- Openingsuren: elke vrijdag, zaterdag en zondag vanaf 12u. In de kerstvakantie ook op weekdagen, zie het programma hieronder. Op feestdagen kunnen de uren afwijken.
+- Openingsuren: elke vrijdag, zaterdag en zondag van 12u tot 23u. In de kerstvakantie ook op weekdagen, zie het programma hieronder. Op feestdagen kunnen de uren afwijken.
 - Reserveren: niet nodig, iedereen is welkom. Groepen vragen best vooraf een tafel aan via ${BASE}/afterwork. Een aanvraag is pas definitief na bevestiging door het team.
 - Afterwork en bedrijfsdrinks: mogelijk voor teams en bedrijven, aanvragen via ${BASE}/afterwork
 - Parkeren: Lippenslaan, Van Bunnenlaan en Zeedijk

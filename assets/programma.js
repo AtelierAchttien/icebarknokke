@@ -184,7 +184,7 @@ window.ICEBAR = (function () {
     const small = container.querySelector("[data-small]");
     if (diff <= 0) {
       big.textContent = "We zijn open";
-      small.textContent = "Elke vrijdag, zaterdag en zondag vanaf 12u, op het Van Bunnenplein.";
+      small.textContent = "Elke vrijdag, zaterdag en zondag van 12u tot 23u, op het Van Bunnenplein.";
     } else if (days === 1) {
       big.textContent = "Morgen gaan we open";
       small.textContent = "Vrijdag 27 november vanaf 18u, op het Van Bunnenplein.";
@@ -197,7 +197,7 @@ window.ICEBAR = (function () {
   // Regel onder het logo op de homepagina: adres plus opening, na de opening de uren.
   function renderHeroInfo(container) {
     if (OPENING - Date.now() > 0) return;
-    container.lastChild.textContent = "Vrijdag, zaterdag en zondag vanaf 12u";
+    container.lastChild.textContent = "Vrijdag, zaterdag en zondag van 12u tot 23u";
   }
 
   return { EVENTS, OPENING, renderUpcoming, renderCalendar, renderStatus, renderHeroInfo };
