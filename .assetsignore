@@ -1,0 +1,11 @@
+# Niet uploaden naar Cloudflare als onderdeel van de site
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+worker
+.agents
+.claude
+skills-lock.json
+node_modules
+.wrangler

@@ -1,0 +1,21 @@
+// Cloudflare Workers: statische site plus een kleine Worker die het
+// reservatieformulier als mail verstuurt (zie worker/index.js).
+// De "name" moet overeenkomen met de naam van de Worker in het Cloudflare-dashboard.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "icebarknokke",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-04",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "MAIL_TO": "icebarknokkexl@gmail.com",
+    "MAIL_FROM": "Ice Bar Knokke <reservaties@mg.icebarknokke.be>",
+    "MAILGUN_DOMAIN": "mg.icebarknokke.be"
+  }
+}

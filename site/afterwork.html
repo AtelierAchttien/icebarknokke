@@ -137,10 +137,10 @@
       });
     })();
 
-    // Reservatieformulier. ENDPOINT is de URL die de aanvraag ontvangt (bv. een n8n-webhook).
-    // Zolang die leeg is, toont het formulier dat het nog niet gekoppeld is.
+    // Reservatieformulier. ENDPOINT is de Worker (worker/index.js) die de aanvraag doormailt.
+    // Lukt het verzenden niet, dan verwijst het formulier naar het mailadres.
     (function () {
-      const ENDPOINT = "";
+      const ENDPOINT = "/api/reservatie";
       const form = document.getElementById("reservatie");
       const status = document.getElementById("form-status");
       const messages = {
