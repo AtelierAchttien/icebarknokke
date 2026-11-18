@@ -212,6 +212,10 @@ p { max-width: var(--measure); }
   z-index: 1;
 }
 
+/* Volgt er een zwarte band, dan loopt de foto onderaan geleidelijk over in het zwart. */
+.page-head.fade::after { background: linear-gradient(180deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, .22) 40%, rgba(18, 18, 18, .55) 72%, var(--slate) 100%); }
+.hero.fade::after { background: linear-gradient(180deg, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .1) 40%, rgba(18, 18, 18, .5) 78%, var(--slate) 100%); }
+
 .page-head > * { position: relative; z-index: 2; }
 
 .page-head h1 { letter-spacing: .06em; text-transform: uppercase; font-size: clamp(2.4rem, 6.5vw, 4.6rem); }
