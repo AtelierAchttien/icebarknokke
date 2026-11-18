@@ -472,6 +472,8 @@ p { max-width: var(--measure); }
 .form-foot small { color: var(--ink-soft); font-size: .98rem; }
 .form-status { margin-top: 20px; font-size: 1.05rem; }
 .form-status.is-error { color: #9a3b2e; }
+.form-status.is-success { margin-top: 28px; padding: 22px 26px; background: var(--white); border: 1px solid var(--ink); border-left-width: 6px; }
+.form-status.is-success strong { display: block; margin-bottom: 8px; font-family: var(--display); font-weight: 400; font-size: 1.7rem; line-height: 1.1; letter-spacing: .03em; text-transform: uppercase; }
 .hp { position: absolute; left: -9999px; }
 
 /* ---------- Sponsors ---------- */

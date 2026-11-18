@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Belleza&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/site.css?v=5e8200c6">
+  <link rel="stylesheet" href="../assets/site.css?v=34d491d8">
 </head>
 <body>
   <a class="skip" href="#inhoud">Naar de inhoud</a>
@@ -189,7 +189,11 @@
           const res = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
           if (!res.ok) throw new Error(res.status);
           form.reset();
-          status.textContent = "Bedankt. We hebben je aanvraag goed ontvangen en nemen snel contact met je op.";
+          status.classList.add("is-success");
+          const title = document.createElement("strong");
+          title.textContent = "Aanvraag ontvangen, nog niet bevestigd";
+          status.append(title, "Je tafel is nog niet gereserveerd. De reservatie is pas definitief nadat ons team ze bevestigd heeft. We nemen zo snel mogelijk contact met je op.");
+          status.scrollIntoView({ block: "nearest", behavior: "smooth" });
         } catch (err) {
           status.classList.add("is-error");
           status.textContent = "Verzenden is niet gelukt. Probeer het nog eens, of mail naar icebarknokkexl@gmail.com.";
