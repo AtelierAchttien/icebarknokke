@@ -3,7 +3,7 @@
 // Datum als JJJJ-MM-DD, acts in volgorde van de avond, label voor feestdagen.
 window.ICEBAR = (function () {
   const EVENTS = [
-    { d: "2026-11-27", acts: ["Opening", "DJ Steve DK"] },
+    { d: "2026-11-27", acts: ["Opening met DJ Steve DK"] },
     { d: "2026-11-28", acts: ["DJ Arno"] },
     { d: "2026-11-29", acts: ["DJ Nicolas"] },
     { d: "2026-12-04", acts: ["DJ Steve DK"] },
