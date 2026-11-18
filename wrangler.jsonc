@@ -16,6 +16,7 @@
   "vars": {
     "MAIL_TO": "icebarknokkexl@gmail.com",
     "MAIL_FROM": "Ice Bar Knokke <reservaties@mg.icebarknokke.be>",
-    "MAILGUN_DOMAIN": "mg.icebarknokke.be"
+    "MAILGUN_DOMAIN": "mg.icebarknokke.be",
+    "SITE_URL": "https://icebarknokke.be"
   }
 }

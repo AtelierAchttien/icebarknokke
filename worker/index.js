@@ -3,8 +3,10 @@
 // /api/reservatie op en stuurt de aanvraag via Mailgun door als mail.
 //
 // Instellingen:
-//   MAIL_TO, MAIL_FROM, MAILGUN_DOMAIN  staan in wrangler.jsonc
+//   MAIL_TO, MAIL_FROM, MAILGUN_DOMAIN, SITE_URL  staan in wrangler.jsonc
 //   MAILGUN_API_KEY                      is een secret in het Cloudflare-dashboard
+
+import { mailSubject, mailText, mailHtml } from "./mail.js";
 
 const FIELDS = {
   naam: { label: "Naam", required: true, max: 120 },
@@ -64,18 +66,12 @@ async function handleReservation(request, env) {
 
   if (!env.MAILGUN_API_KEY) return json({ ok: false, error: "Mail is nog niet ingesteld." }, 503);
 
-  const [y, m, d] = data.datum.split("-");
-  const when = d + "/" + m + "/" + y + " om " + data.uur.replace(":", "u");
-  const lines = Object.entries(FIELDS)
-    .filter(([key]) => data[key])
-    .map(([key, rule]) => rule.label + ": " + (key === "datum" ? d + "/" + m + "/" + y : data[key]));
-
   const mail = new URLSearchParams({
     from: env.MAIL_FROM,
     to: env.MAIL_TO,
-    subject: "Tafelaanvraag: " + data.naam + ", " + data.personen + " pers. op " + when,
-    text: "Nieuwe tafelaanvraag via icebarknokke.be\n\n" + lines.join("\n") +
-      "\n\nAntwoord op deze mail om rechtstreeks naar " + data.naam + " te schrijven."
+    subject: mailSubject(data),
+    text: mailText(data),
+    html: mailHtml(data, env.SITE_URL)
   });
   mail.set("h:Reply-To", data.email);
 
