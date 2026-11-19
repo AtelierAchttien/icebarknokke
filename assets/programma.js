@@ -4,13 +4,13 @@
 window.ICEBAR = (function () {
   const EVENTS = [
     { d: "2026-11-27", acts: ["Opening met DJ Steve DK"] },
-    { d: "2026-11-28", acts: ["DJ Arno"] },
+    { d: "2026-11-28", acts: ["DJ VDC"] },
     { d: "2026-11-29", acts: ["DJ Nicolas"] },
     { d: "2026-12-04", acts: ["DJ Steve DK"] },
     { d: "2026-12-05", acts: ["DCK"] },
     { d: "2026-12-06", acts: ["DJ Bart"] },
     { d: "2026-12-11", acts: ["DJ Pipo"] },
-    { d: "2026-12-12", acts: ["DJ Arno"] },
+    { d: "2026-12-12", acts: ["DJ VDC"] },
     { d: "2026-12-13", acts: ["DJ Nicolas"] },
     { d: "2026-12-18", acts: ["DJ Kees"] },
     { d: "2026-12-19", acts: ["DJ Pipo"] },
@@ -21,7 +21,7 @@ window.ICEBAR = (function () {
     { d: "2026-12-24", label: "Kerstavond", acts: ["DCK"] },
     { d: "2026-12-25", label: "Kerstdag", acts: ["DJ Kees"] },
     { d: "2026-12-26", acts: ["DJ Steve DK"] },
-    { d: "2026-12-27", acts: ["DJ Arno"] },
+    { d: "2026-12-27", acts: ["DJ VDC"] },
     { d: "2026-12-28", acts: ["DCK"] },
     { d: "2026-12-29", acts: ["DJ Steve DK"] },
     { d: "2026-12-30", acts: ["DJ Bart"] },
@@ -37,7 +37,7 @@ window.ICEBAR = (function () {
     { d: "2027-01-17", acts: ["DJ Pipo"] },
     { d: "2027-01-22", acts: ["DJ Nicolas"] },
     { d: "2027-01-23", acts: ["DJ Steve DK"] },
-    { d: "2027-01-24", acts: ["DJ Arno"] },
+    { d: "2027-01-24", acts: ["DJ VDC"] },
     { d: "2027-01-29", acts: ["DJ Steve DK"] },
     { d: "2027-01-30", acts: ["DJ Pipo"] },
     { d: "2027-01-31", label: "Closing party", acts: ["DJ Bart", "DJ Nicolas"] }
