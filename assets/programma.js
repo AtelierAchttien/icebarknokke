@@ -1,6 +1,7 @@
 // Programma Ice Bar Knokke, seizoen 2026-2027.
 // Eén bron voor de homepagina (eerstvolgende avonden) en de kalender.
-// Datum als JJJJ-MM-DD, acts in volgorde van de avond, label voor feestdagen.
+// Datum als JJJJ-MM-DD, acts in volgorde van de avond, label voor feestdagen,
+// note voor een afwijkend sluitingsuur.
 window.ICEBAR = (function () {
   const EVENTS = [
     { d: "2026-11-27", acts: ["Opening met DJ Steve DK"] },
@@ -18,15 +19,15 @@ window.ICEBAR = (function () {
     { d: "2026-12-21", acts: ["DJ Pipo"] },
     { d: "2026-12-22", acts: ["DJ Bart"] },
     { d: "2026-12-23", acts: ["DJ Nicolas"] },
-    { d: "2026-12-24", label: "Kerstavond", acts: ["DCK"] },
+    { d: "2026-12-24", label: "Kerstavond", note: "Open tot 20u", acts: ["DCK"] },
     { d: "2026-12-25", label: "Kerstdag", acts: ["DJ Kees"] },
     { d: "2026-12-26", acts: ["DJ Steve DK"] },
     { d: "2026-12-27", acts: ["DJ VDC"] },
     { d: "2026-12-28", acts: ["DCK"] },
     { d: "2026-12-29", acts: ["DJ Steve DK"] },
     { d: "2026-12-30", acts: ["DJ Bart"] },
-    { d: "2026-12-31", acts: ["Oudejaarsavond-apero"] },
-    { d: "2027-01-01", acts: ["Nieuwjaarsapero"] },
+    { d: "2026-12-31", note: "Open tot 20u", acts: ["Oudejaarsavond-apero"] },
+    { d: "2027-01-01", label: "Nieuwjaarsapero", acts: ["DJ Flappy"] },
     { d: "2027-01-02", acts: ["DJ Pipo"] },
     { d: "2027-01-03", acts: ["DJ Steve DK"] },
     { d: "2027-01-08", acts: ["DJ Nicolas"] },
@@ -43,7 +44,7 @@ window.ICEBAR = (function () {
     { d: "2027-01-31", label: "Closing party", acts: ["DJ Bart", "DJ Nicolas"] }
   ];
 
-  const OPENING = new Date("2026-11-27T18:00:00+01:00");
+  const OPENING = new Date("2026-11-27T17:30:00+01:00");
   const DAYS = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
   const DAYS_SHORT = ["zo", "ma", "di", "wo", "do", "vr", "za"];
   const MONTHS = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
@@ -61,9 +62,12 @@ window.ICEBAR = (function () {
     return e;
   };
 
+  // Regel boven de acts: de feestdag en/of het afwijkende sluitingsuur.
+  const tag = e => [e.label, e.note].filter(Boolean).join(" · ");
+
   function who(e) {
     const span = el("span", "who");
-    if (e.label) span.appendChild(el("small", "tag", e.label));
+    if (tag(e)) span.appendChild(el("small", "tag", tag(e)));
     span.appendChild(document.createTextNode(e.acts.join(" en ")));
     return span;
   }
@@ -156,7 +160,7 @@ window.ICEBAR = (function () {
         time.dateTime = key;
         li.appendChild(time);
         if (e) {
-          if (e.label) li.appendChild(el("span", "tag", e.label));
+          if (tag(e)) li.appendChild(el("span", "tag", tag(e)));
           li.appendChild(el("span", "act", e.acts.join(" en ")));
         }
         grid.appendChild(li);
@@ -184,20 +188,20 @@ window.ICEBAR = (function () {
     const small = container.querySelector("[data-small]");
     if (diff <= 0) {
       big.textContent = "We zijn open";
-      small.textContent = "Elke vrijdag, zaterdag en zondag van 12u tot 23u, op het Van Bunnenplein.";
+      small.textContent = "Elke vrijdag, zaterdag en zondag van 14u tot 24u, op het Van Bunnenplein.";
     } else if (days === 1) {
       big.textContent = "Morgen gaan we open";
-      small.textContent = "Vrijdag 27 november vanaf 18u, op het Van Bunnenplein.";
+      small.textContent = "Vrijdag 27 november vanaf 17u30, op het Van Bunnenplein.";
     } else {
       big.textContent = "Nog " + days + " nachtjes slapen";
-      small.textContent = "We openen op vrijdag 27 november vanaf 18u. Zelfde plek, nieuw seizoen.";
+      small.textContent = "We openen op vrijdag 27 november vanaf 17u30. Zelfde plek, nieuw seizoen.";
     }
   }
 
   // Regel onder het logo op de homepagina: adres plus opening, na de opening de uren.
   function renderHeroInfo(container) {
     if (OPENING - Date.now() > 0) return;
-    container.lastChild.textContent = "Vrijdag, zaterdag en zondag van 12u tot 23u";
+    container.lastChild.textContent = "Vrijdag, zaterdag en zondag van 14u tot 24u";
   }
 
   return { EVENTS, OPENING, renderUpcoming, renderCalendar, renderStatus, renderHeroInfo };
