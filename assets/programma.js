@@ -27,7 +27,7 @@ window.ICEBAR = (function () {
     { d: "2026-12-29", acts: ["DJ Steve DK"] },
     { d: "2026-12-30", acts: ["DJ Bart"] },
     { d: "2026-12-31", note: "Open tot 20u", acts: ["Oudejaarsavond-apero"] },
-    { d: "2027-01-01", acts: ["Nieuwjaarsapero"] },
+    { d: "2027-01-01", label: "Nieuwjaarsapero", acts: ["DJ Flappy"] },
     { d: "2027-01-02", acts: ["DJ Pipo"] },
     { d: "2027-01-03", acts: ["DJ Steve DK"] },
     { d: "2027-01-08", acts: ["DJ Nicolas"] },
