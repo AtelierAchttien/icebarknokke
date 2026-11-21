@@ -28,6 +28,10 @@ const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const cap = t => t[0].toUpperCase() + t.slice(1);
 const acts = e => e.acts.join(" en ");
 const openingDate = EVENTS[0].d;
+const tag = e => [e.label, e.note].filter(Boolean).join(" · ");
+// Uur van de opening in Belgische wintertijd (UTC+1), als "17:30" en als "17u30".
+const openingClock = new Date(OPENING.getTime() + 3600000).toISOString().slice(11, 16);
+const openingHour = Number(openingClock.slice(0, 2)) + "u" + (openingClock.slice(3) === "00" ? "" : openingClock.slice(3));
 
 function between(text, name, content) {
   const start = "<!-- " + name + ":start -->", end = "<!-- " + name + ":end -->";
@@ -47,7 +51,7 @@ for (const list of months.values()) {
   for (const e of list) {
     const p = parse(e.d);
     html += '                <li><time class="day" datetime="' + e.d + '"><b>' + String(p.d).padStart(2, "0") + "</b><small>" + DAYS_SHORT[p.wd] + '</small></time><span class="who">' +
-      (e.label ? '<small class="tag">' + esc(e.label) + "</small>" : "") + esc(acts(e)) + "</span></li>\n";
+      (tag(e) ? '<small class="tag">' + esc(tag(e)) + "</small>" : "") + esc(acts(e)) + "</span></li>\n";
   }
   html += "              </ol>\n            </section>\n";
 }
@@ -65,7 +69,7 @@ const events = EVENTS.map(e => {
     "@type": "Event",
     name: title + " in de Ice Bar Knokke",
     description: cap(DAYS[p.wd]) + " " + p.d + " " + MONTHS[p.m - 1] + " " + p.y + ": " + title + " in de Ice Bar op het Van Bunnenplein in Knokke-Heist.",
-    startDate: e.d === openingDate ? e.d + "T18:00:00+01:00" : e.d,
+    startDate: e.d === openingDate ? e.d + "T" + openingClock + ":00+01:00" : e.d,
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: place,
@@ -84,7 +88,7 @@ write("kalender.html", page);
 // 3. llms.txt
 const last = parse(EVENTS[EVENTS.length - 1].d);
 const firstP = parse(openingDate);
-const line = e => { const p = parse(e.d); return "- " + cap(DAYS[p.wd]) + " " + p.d + " " + MONTHS[p.m - 1] + " " + p.y + ": " + (e.label ? e.label + ", " : "") + acts(e); };
+const line = e => { const p = parse(e.d); return "- " + cap(DAYS[p.wd]) + " " + p.d + " " + MONTHS[p.m - 1] + " " + p.y + ": " + (e.label ? e.label + ", " : "") + acts(e) + (e.note ? " (" + e.note.toLowerCase() + ")" : ""); };
 write("llms.txt", `# Ice Bar Knokke
 
 > De Ice Bar Knokke is een winterbar in chaletstijl op het Van Bunnenplein in Knokke-Heist (België), met elke avond een dj. Het seizoen 2026-2027 loopt van ${DAYS[firstP.wd]} ${firstP.d} ${MONTHS[firstP.m - 1]} ${firstP.y} tot en met ${DAYS[last.wd]} ${last.d} ${MONTHS[last.m - 1]} ${last.y}.
@@ -92,8 +96,11 @@ write("llms.txt", `# Ice Bar Knokke
 ## Praktisch
 
 - Adres: Van Bunnenplein, 8300 Knokke-Heist, België
-- Opening: ${DAYS[firstP.wd]} ${firstP.d} ${MONTHS[firstP.m - 1]} ${firstP.y} om ${OPENING.getUTCHours() + 1}u
-- Openingsuren: elke vrijdag, zaterdag en zondag van 12u tot 23u. In de kerstvakantie ook op weekdagen, zie het programma hieronder. Op feestdagen kunnen de uren afwijken.
+- Opening: ${DAYS[firstP.wd]} ${firstP.d} ${MONTHS[firstP.m - 1]} ${firstP.y} om ${openingHour}
+- Openingsuren: elke vrijdag, zaterdag en zondag van 14u tot 24u, muziek tot 23u.
+- Kerstvakantie: ook open van maandag tot donderdag, van 14u tot 23u, muziek tot 22u. Zie het programma hieronder voor de juiste dagen.
+- Kerstavond en oudejaarsavond: open van 14u tot 20u, muziek tot 19u.
+- Kerstdag en nieuwjaarsdag: gewoon open.
 - Reserveren: niet nodig, iedereen is welkom. Groepen vragen best vooraf een tafel aan via ${BASE}/afterwork. Een aanvraag is pas definitief na bevestiging door het team.
 - Afterwork en bedrijfsdrinks: mogelijk voor teams en bedrijven, aanvragen via ${BASE}/afterwork
 - Parkeren: Lippenslaan, Van Bunnenlaan en Zeedijk
